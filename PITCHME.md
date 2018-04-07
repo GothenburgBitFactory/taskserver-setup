@@ -874,6 +874,8 @@ Syncing with host.domain:53589
 Sync successful.  2 changes uploaded.
 ```
 
++++
+
 ## Note
 
 You should get an indication that tasks were uploaded, in this case 2 of them.
