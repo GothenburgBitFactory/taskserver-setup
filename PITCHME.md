@@ -792,7 +792,7 @@ Whatever you actually used there, should be used here.
 
 ## Certificates
 
-If you have configured Taskserver and created a user account (or better yet, someone created an account for you) then you now have details needed in the configuration of your Taskwarrior client. You should have the files and information mentioned on the \hyperlink{clientconfiguration}{last slide}.
+If you have configured Taskserver and created a user account (or better yet, someone created an account for you) then you now have details needed in the configuration of your Taskwarrior client.
 
 Now we feed this information to Taskwarrior.
 
