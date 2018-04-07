@@ -204,8 +204,6 @@ $ brew install gnutls
 
 ## Windows
 
-Before building the software, you will need to satisfy the dependencies by installing the following:
-
 Start the [Cygwin](https://cygwin.com) GUI and install the following packages and their dependencies.
 
 - `GnuTLS`
