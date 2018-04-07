@@ -771,13 +771,13 @@ You have now created a new user account on the server, created a new client cert
 
 ## Information needed
 
-- `ca.cert.pem` is the certificate authority, and the only way to validate self-signed certs such as the ones we have created here.
+- `ca.cert.pem` is the certificate authority, and the only way to validate self-signed certs like ours.
 - `first_last.cert.pem` is the client certificate.
 - `first_last.key.pem` is the client key.
 - The new user key (yours will be different): `cf31f287-ee9e-43a8-843e-e8bbd5de4294`
 - The organization, `Public`.
-- The full and proper user name, \verb+First Last+.
-- The server address and port, `host.domain:53589`. In the \hyperlink{serverconfiguration}{server configuration} we used `localhost` as an example. Whatever you actually used there, should be used here.
+- The full and proper user name, `First Last`.
+- The server address and port, `host.domain:53589`. In the server configuration we used `localhost` as an example. Whatever you actually used there, should be used here.
 
 +++
 
