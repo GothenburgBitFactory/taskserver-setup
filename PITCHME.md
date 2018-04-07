@@ -738,7 +738,7 @@ Created user 'First Last' for organization 'Public'
 
 Note that you will get a different 'New user key' than is shown here, and you will need to retain it, to be used later for client configuration.  Note that the key is just a unique id, because your name alone is not necessarily unique.
 
----
++++
 
 ## Create Certificate and Key
 
@@ -747,12 +747,13 @@ Go to your `SOURCEDIR`, which depends on which installation method you chose. He
 ```bash
 $ cd ~/taskd-1.1.0/pki
 $ ./generate.client first_last
-...
 ```
 
 This will generate a new key and cert, named `first_last.cert.pem` and `first_last.key.pem`. It is not important that 'first\_last' was used here, just that it is something unique, and valid for use in a file name. It has no bearing on security.
 
-**Let's encrypt**
++++
+
+## Let's encrypt
 
 Certificates coming from Let's encrypt have **not** been successfully used by anyone. Please remember that Let's encrypt only generates servers, but we need a client certificate as well. A working scenario would be highly appreciated.
 
