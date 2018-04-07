@@ -456,11 +456,11 @@ Usage: taskd -v|--version
 
 ## taskd-User
 
-**We assume that you will do all configuration with the taskd user you chose to run the server with.**
+We assume that you will do all configuration with the taskd user you chose to run the server with.
 
----
++++
 
-## Server Configuration - Data Location
+## Data Location
 
 Configuring the server is straightforward, but needs a little planning.
 
@@ -471,7 +471,11 @@ $ export TASKDDATA=/var/taskd
 $ mkdir -p $TASKDDATA
 ```
 
-If the `TASKDDATA` variable is not set, then most `taskd` commands require the \verb+--data ...+ argument, otherwise the commands rely on the `TASKDDATA` value to indicate the location.
++++
+
+## Environment variable
+
+If the `TASKDDATA` variable is not set, then most `taskd` commands require the `--data ...` argument, otherwise the commands rely on the `TASKDDATA` value to indicate the location.
 
 **Everything the server does will be confined to that directory.**
 
@@ -479,9 +483,9 @@ There are two 'D's in `TASKDDATA`, and omitting one is a common mistake.
 
 The user that will run the server must have write permissions in that directory.
 
----
++++
 
-## Server Configuration - Initialization
+## Initialization
 
 Now we let the server initialize that directory:
 
@@ -497,15 +501,15 @@ It is a good idea to copy the `pki` subdirectory from your `SOURCEDIR` to your `
 
 If you installed from a package (manager) search for the pki directory, `find / -name pki -type d` (example `/usr/share/taskd/pki/` for Ubuntu).
 
----
++++
 
-## Server Configuration - Keys & Certificates (1)
+## Keys & Certificates (1)
 
 Now we create certificates and keys. The command below will generate all the certs and keys for the server, but this uses self-signed certificates, and this is not recommended for production use. This is for personal use, and this may be acceptable for you, but if not, you will need to purchase a proper certificate and key, backed by a certificate authority.
 
----
++++
 
-## Server Configuration - Keys & Certificates (2)
+## Keys & Certificates (2)
 
 The certificate and key generation scripts make assumptions ***that are guaranteed to be wrong for you***. Specifically the `generate.server` script has a hard-coded `CN` entry that is not going to work. You ***need*** to edit the `vars` file, which you find in the `pki` subdirectory in your `SOURCEDIR`.
 
@@ -518,9 +522,9 @@ You will need to modify this value to match your server.
 
 Most probably the result of `hostname -f` is exactly what you need ("yourserver.example.com").
 
----
++++
 
-## Server Configuration - Keys & Certificates (3)
+## Keys & Certificates (3)
 
 The value of CN (Common Name) is important.
 
@@ -541,9 +545,9 @@ $ cp server.crl.pem  $TASKDDATA
 $ cp ca.cert.pem     $TASKDDATA
 ```
 
----
++++
 
-## Server Configuration - Keys & Certificates (4)
+## Keys & Certificates (4)
 
 ```bash
 $ taskd config --force client.cert $TASKDDATA/client.cert.pem
@@ -560,9 +564,9 @@ There are the server key/certs, which are used to authenticate the server and en
 
 Finally there are client key/certs, which are not what you might  expect. These are for API access, and not for your Taskwarrior client. Those are created later.
 
----
++++
 
-## Server Configuration - Other Configuration
+## Other Configuration
 
 Now we configure some basic details for the server.  The chosen port is 53589. Note that we allow Taskwarrior clients specifically.
 
@@ -590,6 +594,7 @@ $ man taskdrc
 ---
 
 ## Server - Control
+
 You can now to launch the server:
 
 ```bash
@@ -610,7 +615,7 @@ Check that your server is running by looking in the `taskd.log` file, or running
 $ ps -leaf | grep taskd
 ```
 
----
++++
 
 ## Server - Interactive or Non-Daemon Server
 
