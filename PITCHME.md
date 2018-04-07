@@ -966,7 +966,7 @@ There are several ways of getting help:
 
 - We have an [FAQ](https://taskwarrior.org/support/faq.html) covering a lot of questions.
 - Email us at [support@taskwarrior.org](mailto:support@taskwarrior.org), then wait patiently for a volunteer to respond.
-- Join us IRC in the \#taskwarrior channel on Freenode.net, and get a quick response from the community, where, as you have anticipated, we will walk you through the checklist above.
+- Join us IRC in the [#taskwarrior](https://botbot.me/freenode/taskwarrior/) channel on Freenode.net, and get a quick response from the community, where, as you have anticipated, we will walk you through the checklist above.
 
 +++
 
