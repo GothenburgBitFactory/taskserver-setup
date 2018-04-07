@@ -765,7 +765,11 @@ A working scenario would be highly appreciated.
 
 ## Taskwarrior Configuration
 
-You have now created a new user account on the server, created a new client cert and key, and have details that need to be transferred to the user, to set up a sync client.  The details needed are:
+You have now created a new user account on the server, created a new client cert and key, and have details that need to be transferred to the user, to set up a sync client.
+
++++
+
+## Information needed
 
 - `ca.cert.pem` is the certificate authority, and the only way to validate self-signed certs such as the ones we have created here.
 - `first_last.cert.pem` is the client certificate.
