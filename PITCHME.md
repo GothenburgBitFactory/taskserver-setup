@@ -22,3 +22,13 @@ Now move that file to somewhere safe. All software contains bugs, so make regula
 ## Attention
 
 This is not only due to a good habit, we will modify your data, so a backup is highly recommended.
+
+---
+
+## Preparation - Choose A  Machine
+
+A suitable machine to run your Taskserver is one that is always available. If you have such a machine, or have access to a hosted machine, that is ideal.
+
+If your machine is not continuously available, it can still be a suitable Taskserver because the sync mechanism doesn't require continuous access. When a client cannot sync, it simply accumulates local, unpropagated changes until it can sync.
+
+A laptop is a poor choice for a Taskserver host.
