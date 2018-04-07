@@ -351,15 +351,21 @@ The convention we use is that `master` represents the stable release.  The numbe
 
 +++
 
-## Submodules
+## Development version
 
-Patch branches are reserved for emergency releases, so in this example you would choose to build 1.2.0 as the latest development branch like this (please not that starting with version 1.2.0 we make use of submodules):
+Patch branches are reserved for emergency releases, so in this example you would choose to build 1.2.0 as the latest development branch like this (please not that starting with version 1.2.0 we make use of submodules).
 
 ```bash
 $ git checkout 1.2.0
 Branch 1.2.0 set up to track remote branch 1.2.0 from origin.
 Switched to a new branch '1.2.0'
+```
 
++++
+
+## Submodules
+
+```bash
 $ git submodule init
 Submodule 'src/libshared' (https://git.tasktools.org/scm/tm/libshared.git) registered for path 'src/libshared'
 
