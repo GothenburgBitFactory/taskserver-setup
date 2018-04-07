@@ -882,7 +882,7 @@ You should get an indication that tasks were uploaded, in this case 2 of them.
 
 Please note that older Taskwarrior versions - before 2.5.1 - only sync the **pending** tasks and not all tasks.
 
----
++++
 
 ## General Sync
 
@@ -895,7 +895,15 @@ Syncing with host.domain:53589
 Sync successful.  No changes.
 ```
 
++++
+
+## Feedback
+
 This will give you feedback about what happened. Please note that it is perfectly safe to run this command as often as you wish. Syncing is safe and does not consume great system resources.
+
++++
+
+## Connectivity
 
 Note that if your client is a mobile device, a sync command may consume some of your data usage. Act accordingly.
 
