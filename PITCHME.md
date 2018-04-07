@@ -501,7 +501,7 @@ It is a good idea to copy the `pki` subdirectory from your `SOURCEDIR` to your `
 
 If you installed from a package (manager) search for the pki directory, `find / -name pki -type d` (example `/usr/share/taskd/pki/` for Ubuntu).
 
-+++
+---
 
 ## Keys & Certificates (1)
 
@@ -552,7 +552,7 @@ $ cp ca.cert.pem     $TASKDDATA
 
 +++
 
-## Keys & Certificates (4)
+## Keys & Certificates (5)
 
 ```bash
 $ taskd config --force client.cert $TASKDDATA/client.cert.pem
@@ -562,6 +562,10 @@ $ taskd config --force server.key  $TASKDDATA/server.key.pem
 $ taskd config --force server.crl  $TASKDDATA/server.crl.pem
 $ taskd config --force ca.cert     $TASKDDATA/ca.cert.pem
 ```
+
++++
+
+## Keys & Certificates (6)
 
 There are three classes of key/cert here. There is the CA (Certificate Authority) cert, which has cert signing capabilities and is used to sign and verify the other certs.
 
