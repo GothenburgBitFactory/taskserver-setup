@@ -624,7 +624,7 @@ $ ps -leaf | grep taskd
 
 +++
 
-## Server - Interactive or Non-Daemon Server
+## Interactive or Non-Daemon Server
 
 A daemon server is typically how you would want to run Taskserver, but there may be times when you need to run the server attached to a terminal.  These two commands are identical:
 
@@ -634,6 +634,10 @@ $ taskd server --data $TASKDDATA --daemon
 ```
 
 By omitting the `--daemon` option, the server remains attached to the terminal.  Then to stop the server you can enter `Ctrl-C`.
+
++++
+
+## Interactive Server
 
 The interactive mode is really only useful for debugging, in conjunction with TLS debug mode, like this:
 
@@ -645,9 +649,9 @@ $ taskd server --data $TASKDDATA
 
 With a `debug.tls` setting that is non-zero, you see lots of security-related diagnostic output.
 
----
++++
 
-## Server - systemd unit file
+## systemd unit file
 
 You can start Taskserver using a systemd-unitfile (called `taskd.service`) like the following (please add the contents of `$TASKDDATA` not the variable itself). Running the Taskserver as root is not recommended, please add an appropriate user and group to run the daemon with (`$TASKDUSER` and `$TASKDGROUP`).
 
