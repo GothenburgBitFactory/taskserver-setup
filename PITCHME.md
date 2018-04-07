@@ -296,22 +296,32 @@ Usage: taskd -v|--version
 
 Installing Taskserver from git is a matter of cloning the git repository and building the server.
 
-The same dependencies as for installation from tarball apply. We have detailed instructions for the following operating operating systems (click on the name to continue), afterwards come back to this slide or continue with cloning the repository.
+The same dependencies as for installation from tarball apply. Please check the corresponding slides.
 
----
++++
 
-## Installation - Cloning the repository
+## Cloning the repository
 
 Now clone the repository like this:
 
 ```bash
-$ git clone https://git.tasktools.org/scm/tm/taskd.git taskd.git
+$ git clone --recurse-submodules=yes https://github.com/GothenburgBitFactory/taskserver.git taskserver.git
 ...
 ```
 
-**Use stable!**
++++
 
-It is highly recommended that you build the stable version. This involves simply moving on to the next step.
+## Use stable!
+
+It is highly recommended that you build the stable version. This involves simply executing the next command.
+
+```bash
+$ cd taskserver.git
+
+$ git checkout master
+...
+```
+
 
 Only under special circumstances you should build the unstable development version.
 
@@ -324,7 +334,7 @@ The unstable development version is at no point guaranteed to work or even compi
 The stable version is always merged to the `master` branch, which is the default branch, so ordinarily nothing needs to be done. To build an unstable branch, first determine which branch by looking at the available branches:
 
 ```bash
-$ cd taskd.git
+$ cd taskserver.git
 $ git branch -a
 * master
   remotes/origin/1.1.0
@@ -372,14 +382,14 @@ Submodule path 'src/libshared': checked out '2b0b70d90acb9a3ff3548befab9db8beb85
 Now build the Taskserver.
 
 ```bash
-$ cd taskd.git
+$ cd taskserver.git
 $ cmake -DCMAKE_BUILD_TYPE=release .
 ...
 $ make
 ...
 ```
 
-In this case the `SOURCEDIR` is `taskd.git`.
+In this case the `SOURCEDIR` is `taskserver.git`.
 
 ---
 
