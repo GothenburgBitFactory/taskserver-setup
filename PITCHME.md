@@ -711,11 +711,11 @@ A user account must be created, along with a key, cert and ID, before syncing ma
 
 Before creating a user account, you may need to create an organization. An organization consists of a group of zero or more users. You can get away with just one organization, and in this example, we will create just one, named 'Public'.
 
-You can create as many organizations as you wish (even one per user), and the purpose is simply to group users together. Future features will utilize this.
-
 +++
 
 ## Create Organisation
+
+You can create as many organizations as you wish (even one per user), and the purpose is simply to group users together. Future features will utilize this.
 
 ```bash
 $ taskd add org Public
