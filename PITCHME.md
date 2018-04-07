@@ -777,7 +777,16 @@ You have now created a new user account on the server, created a new client cert
 - The new user key (yours will be different): `cf31f287-ee9e-43a8-843e-e8bbd5de4294`
 - The organization, `Public`.
 - The full and proper user name, `First Last`.
-- The server address and port, `host.domain:53589`. In the server configuration we used `localhost` as an example. Whatever you actually used there, should be used here.
+
+---
+
+## Server address and port
+
+The server address and port, `host.domain:53589` is needed as well.
+
+In the server configuration we used `localhost` as an example. With `localhost` your server can not be reached from outside the machine your are running it on.
+
+Whatever you actually used there, should be used here.
 
 +++
 
