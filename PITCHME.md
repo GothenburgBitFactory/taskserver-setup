@@ -836,15 +836,17 @@ Finally we provide the credentials, which combine the organization, account name
 $ task config taskd.credentials - Public/First Last/cf31f287-ee9e-43a8-843e-e8bbd5de4294
 ```
 
+Your Taskwarrior is now ready to sync.
+
 +++
 
 ## Trust Level
 
 It is possible to configure Taskwarrior's trust level, which determines how the server certificate is treated.
 
-You could specify `taskd.trust=ignore hostname` to skip certificate hostname validation. ***This is a bad idea***. You can also specify `taskd.trust=allow all` to perform no validation. ***This is a worse idea***. The default value is `taskd.trust=strict` which performs the most stringent verification, and is more secure.
+You could specify `taskd.trust=ignore hostname` to skip certificate hostname validation. ***This is a bad idea***. You can also specify `taskd.trust=allow all` to perform no validation. ***This is a worse idea***.
 
-Your Taskwarrior is now ready to sync.
+The default value is `taskd.trust=strict` which performs the most stringent verification, and is more secure.
 
 +++
 
