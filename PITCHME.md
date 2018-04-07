@@ -909,7 +909,7 @@ Note that if your client is a mobile device, a sync command may consume some of 
 
 But it does require network connectivity, and if there is no connectivity you will be notified.  It is not a problem if a sync fails because of this, because the next sync that works will catch up with all the changes, and do the right merging. *Taskwarrior and Taskserver were designed to work together, and tolerate intermittent connectivity*.
 
----
++++
 
 ## Sync Reminder
 
@@ -921,7 +921,13 @@ No matches.
 There are local changes.  Sync required.
 ```
 
-This is just a reminder to sync. Respond with a sync, and the reminder goes away:
+This is just a reminder to sync.
+
++++
+
+## Sync!
+
+Respond with a sync, and the reminder goes away:
 
 ```bash
 $ task sync
