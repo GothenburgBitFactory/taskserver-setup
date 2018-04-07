@@ -960,13 +960,20 @@ We'll ask you to provide the `diagnostics` output for both Taskwarrior and Tasks
 
 +++
 
-## Getting Help
+## Getting Help (1)
 
 There are several ways of getting help:
 
-- We have an [https://taskwarrior.org/support/faq.html](FAQ) covering a lot of questions.
+- We have an [FAQ](https://taskwarrior.org/support/faq.html) covering a lot of questions.
 - Email us at [support@taskwarrior.org](mailto:support@taskwarrior.org), then wait patiently for a volunteer to respond.
 - Join us IRC in the \#taskwarrior channel on Freenode.net, and get a quick response from the community, where, as you have anticipated, we will walk you through the checklist above.
+
++++
+
+## Getting Help (2)
+
+There are several ways of getting help:
+
 - Even though Twitter is no means of support, you can get in touch with [@taskwarrior](https://twitter.com/taskwarrior).
 - We have a [User Mailinglist](https://groups.google.com/forum/\#!forum/taskwarrior-user) which you can join anytime to discuss about Taskwarrior and techniques.
 - The [Developer Mailinglist](https://groups.google.com/forum/\#!forum/taskwarrior-dev) is focussing on a more technical oriented audience.
