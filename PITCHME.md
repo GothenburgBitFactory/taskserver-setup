@@ -471,11 +471,11 @@ $ export TASKDDATA=/var/taskd
 $ mkdir -p $TASKDDATA
 ```
 
+If the `TASKDDATA` variable is not set, then most `taskd` commands require the `--data ...` argument.
+
 +++
 
-## Environment variable
-
-If the `TASKDDATA` variable is not set, then most `taskd` commands require the `--data ...` argument, otherwise the commands rely on the `TASKDDATA` value to indicate the location.
+## Directory
 
 **Everything the server does will be confined to that directory.**
 
