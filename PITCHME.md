@@ -10,7 +10,7 @@ Please follow the steps **carefully** and **note** all things you do differently
 
 +++
 
-## Preparation - Backup Your Data
+## Backup Your Data
 
 Let's reinforce a good habit and make a backup copy of your data first. Here is a very easy way to backup your data:
 
@@ -29,7 +29,7 @@ This is not only due to a good habit, we will modify your data, so a backup is h
 
 +++
 
-## Preparation - Choose A  Machine
+## Choose A  Machine
 
 A suitable machine to run your Taskserver is one that is always available. If you have such a machine, or have access to a hosted machine, that is ideal.
 
@@ -39,19 +39,19 @@ A laptop is a poor choice for a Taskserver host.
 
 +++
 
-## Preparation - Choose A Port
+## Choose A Port
 
 By default, Taskserver uses port 53589. You can choose any port you wish, provided it is unused. If you choose a port number that is under 1024, then Taskserver must run as root, which is not recommended.
 
 +++
 
-## Preparation - User/Group
+## User & Group
 
 Ideally you will create a new user and group solely to run the Taskserver. This helps you keep the data secure from other users on the machine, as well as controlling the privileges of Taskserver.
 
 +++
 
-## Preparation - Firewall
+## Firewall
 
 Depending on what devices you use to access your server, you may need to configure the firewall to allow incoming TCP/IP traffic on your chosen port.
 
@@ -61,15 +61,15 @@ Depending on what devices you use to access your server, you may need to configu
 
 ---
 
-## Installation (1)
+## Installation from a package
 
 Installing Taskserver from a binary package is the simplest option, but you will need to refer to your package manager's documentation and procedures for doing this.
 
 Take a look at the [Download](http://taskwarrior.org/download/#dist) page for examples. Generally there are too many package managers to make a complete list with instructions here.
 
----
++++
 
-## Installation (2)
+## Availability
 
 Most importantly, for now, Taskserver is a new product, and there are very few packages available.  It is expected that this situation will change soon.  When it does, this page will be updated.
 
@@ -77,13 +77,7 @@ Meanwhile, there is installation from either git or tarball.
 
 ---
 
-## Installation - Introduction
-
-Installing Taskserver from a tarball is a matter of downloading the tarball, extracting it, satisfying dependencies and building the server.
-
----
-
-## Installation - Dependencies (general)
+## Dependencies (general)
 
 Before building the software, you will need to satisfy the dependencies by installing the following:
 
@@ -93,9 +87,9 @@ Before building the software, you will need to satisfy the dependencies by insta
 - `make`
 - A C++ Compiler (GCC 4.7 or Clang 3.0 or newer)
 
----
++++
 
-## Installation - Dependencies (note)
+## Dependencies (note)
 
 Note that some OSes (Darwin, FreeBSD ...) include `libuuid` functionality in libc, check the following slides for more detailed instructions.
 
@@ -103,9 +97,9 @@ You don't necessarily need the latest version of all components, but it is a goo
 
 **Using GnuTLS version 2.12.x is neither adequately secure, nor production quality. Please check the slide describing the GnuTLS-Problem for details.**
 
----
++++
 
-## Installation - Dependencies (OS)
+## Dependencies (OS)
 
 We have detailed instructions for the following operating operating systems on the following slides:
 
@@ -122,7 +116,7 @@ In case you can add your operating system of choice, please send an email to [su
 
 +++
 
-## Installation - CentOS
+### CentOS
 
 Before building the software, you will need to satisfy the dependencies by installing the following:
 
@@ -136,7 +130,7 @@ $ sudo yum install gnutls-utils
 
 +++
 
-## Installation - Debian
+## Debian
 
 Before building the software, you will need to satisfy the dependencies by installing the following:
 
@@ -150,7 +144,7 @@ $ sudo apt install gnutls-utils
 
 +++
 
-## Installation - Fedora
+## Fedora
 
 Before building the software, you will need to satisfy the dependencies by installing the following:
 
@@ -163,7 +157,7 @@ $ sudo dnf install gnutls-utils
 ```
 +++
 
-## Installation - openSUSE
+## openSUSE
 
 Before building the software, you will need to satisfy the dependencies by installing the following:
 
@@ -177,7 +171,7 @@ $ sudo zypper install gnutls-utils
 
 +++
 
-## Installation - Ubuntu
+## Ubuntu
 
 Before building the software, you will need to satisfy the dependencies by installing the following:
 
@@ -191,7 +185,7 @@ $ sudo apt install gnutls-utils
 
 +++
 
-## Installation - Windows
+## Windows
 
 Before building the software, you will need to satisfy the dependencies by installing the following:
 
@@ -206,7 +200,7 @@ Start the [Cygwin](https://cygwin.com) GUI and install the following packages an
 
 +++
 
-## Installation - Mac OS X
+## MacOS
 
 Before building the software, you will need to satisfy the dependencies by installing the following:
 
@@ -224,12 +218,17 @@ $ brew install gnutls
 
 ---
 
-## Installation - Download
+## Installation from a tarball
+
+Installing Taskserver from a tarball is a matter of downloading the tarball, extracting it, satisfying dependencies and building the server.
+
++++
+
+## Download
 
 The next step is to obtain the code. This means getting the Task Server 1.1.0 (or newer) source tarball.  You should check for the latest stable release here:
 
 [http://taskwarrior.org/download/](http://taskwarrior.org/download/)
-
 
 You can download the tarball with `curl`, as an example of just one of many ways to download the tarball.
 
@@ -237,9 +236,9 @@ You can download the tarball with `curl`, as an example of just one of many ways
 $ curl -LO https://taskwarrior.org/download/taskd-latest.tar.gz
 ```
 
----
++++
 
-## Installation - Build
+## Build
 
 Expand the tarball, and build the Taskserver.
 
@@ -254,7 +253,7 @@ $ make
 
 We will refer to the directory where you extracted the data to as `SOURCEDIR` (in the example above it is `taskd-latest`).
 
----
++++
 
 ## Installation - Build Again
 
@@ -268,7 +267,7 @@ $ rm CMakeCache.txt
 ...
 ```
 
----
++++
 
 ## Installation - make install
 
@@ -279,7 +278,7 @@ $ sudo make install
 ...
 ```
 
----
++++
 
 ## Installation - Verify installation
 
@@ -294,9 +293,9 @@ Usage: taskd -v|--version
 ...
 ```
 
----
++++
 
-## Installation - from Git-Repository
+## Installation from Git-Repository
 
 Installing Taskserver from git is a matter of cloning the git repository and building the server.
 
