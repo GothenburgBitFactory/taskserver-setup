@@ -322,12 +322,11 @@ $ git checkout master
 ...
 ```
 
-
 Only under special circumstances you should build the unstable development version.
 
----
++++
 
-## Installation - Special Circumstances (1)
+## Special Circumstances (1)
 
 The unstable development version is at no point guaranteed to work or even compile. The only time it does stabilize is right at the end of the development cycle, and in that case, you should wait until the release, so you are running a supported version.
 
@@ -344,15 +343,15 @@ $ git branch -a
   remotes/origin/master
 ```
 
----
++++
 
-## Installation - Special Circumstances (2)
+## Special Circumstances (2)
 
 The convention we use is that `master` represents the stable release.  The numbered branches represent the latest development (1.2.0, the 'highest' branch number, ending in '.0') and a patch branch (1.1.1, ending in a non-zero number).
 
----
++++
 
-## Installation - Special Circumstances (3)
+## Special Circumstances (3)
 
 Patch branches are reserved for emergency releases, so in this example you would choose to build 1.2.0 as the latest development branch like this (please not that starting with version 1.2.0 we make use of submodules):
 
@@ -375,9 +374,9 @@ Checking connectivity... done.
 Submodule path 'src/libshared': checked out '2b0b70d90acb9a3ff3548befab9db8beb85a0c2d'
 ```
 
----
++++
 
-## Installation - Build from Git
+## Build from Git
 
 Now build the Taskserver.
 
@@ -393,7 +392,7 @@ In this case the `SOURCEDIR` is `taskserver.git`.
 
 ---
 
-## Installation - Test your build
+## Test your build
 
 Having built the server, now build and run the unit tests. Although this is an optional step, it is a good idea to know whether the build works on your platform.
 
