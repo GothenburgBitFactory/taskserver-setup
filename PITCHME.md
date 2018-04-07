@@ -396,7 +396,7 @@ $ make
 
 In this case the `SOURCEDIR` is `taskserver.git`.
 
----
++++
 
 ## Test your build
 
@@ -416,13 +416,17 @@ Runtime:     1 seconds
 $ cd ..
 ```
 
++++
+
+## Interprete the results
+
 This example shows that all 2,920 tests pass.  If you see test failures, stop and report them.
 
 Note that there are some unit tests that fail if you have not built the latest commit. Seeing 4 test failures may mean all is well. Seeing 30 failures does not.
 
----
++++
 
-## Installation
+## make install
 
 Now install Taskserver. This copies files into the right place, and installs man pages.
 
@@ -431,7 +435,7 @@ $ sudo make install
 ...
 ```
 
----
++++
 
 ## Verify your Installation
 
