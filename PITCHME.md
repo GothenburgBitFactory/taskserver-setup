@@ -503,13 +503,13 @@ If you installed from a package (manager) search for the pki directory, `find / 
 
 ---
 
-## Keys & Certificates (1)
+## Keys & Certificates
 
 Now we create certificates and keys. The command below will generate all the certs and keys for the server, but this uses self-signed certificates, and this is not recommended for production use. This is for personal use, and this may be acceptable for you, but if not, you will need to purchase a proper certificate and key, backed by a certificate authority.
 
 +++
 
-## Keys & Certificates (2)
+## Assumptions
 
 The scripts make assumptions ***that are guaranteed to be wrong for you***. Specifically the `generate.server` script has a hard-coded `CN` entry that is not going to work. You ***need*** to edit the `vars` file, which you find in the `pki` subdirectory in your `SOURCEDIR`.
 
@@ -523,7 +523,7 @@ Most probably the result of `hostname -f` is exactly what you need ("yourserver.
 
 +++
 
-## Keys & Certificates (3)
+## Common Name
 
 The value of CN (Common Name) is important.
 
