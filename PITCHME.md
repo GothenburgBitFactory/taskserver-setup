@@ -796,6 +796,10 @@ If you have configured Taskserver and created a user account (or better yet, som
 
 Now we feed this information to Taskwarrior.
 
++++
+
+## Copy all of them
+
 Copy the Cert, Key and CA to your `~/.task` directory.  The reason we are copying the CA cert is because this is a self-signed cert, and we need the CA to validate against.  Alternately we could force Taskwarrior to trust all certs, but that is not recommended.
 
 ```bash
@@ -803,6 +807,10 @@ $ cp first_last.cert.pem ~/.task
 $ cp first_last.key.pem  ~/.task
 $ cp ca.cert.pem         ~/.task
 ```
+
++++
+
+## Configure Taskwarrior to use them
 
 Now we need to make Taskwarrior aware of these certs:
 
