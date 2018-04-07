@@ -190,11 +190,9 @@ $ sudo apt install gnutls-utils
 
 ## MacOS
 
-*TODO confirmation needed*
-
 Install Xcode from Apple, via the AppStore, launch it, and select from some menu that you want the command line tools.
 
-We expect you to have [http://brew.sh/}(Homebrew) installed on your Mac.
+We expect you to have [Homebrew](http://brew.sh/) installed on your Mac.
 
 ```bash
 $ brew install cmake
