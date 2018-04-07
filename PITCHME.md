@@ -862,9 +862,9 @@ For Taskwarrior 2.3.0 you can specify `taskd.trust=yes` in order to skip certifi
 
 ## First Time Sync
 
-You are now ready to sync your Taskwarrior client. You will do this differently depending on whether this is the first sync per device, or one of the many subsequent syncs.
+You will do this differently depending on whether this is the first sync per device, or one of the many subsequent syncs.
 
-The first time you sync is special - the client sends all your tasks to the server.  This is something you should only do once.  Run this:
+The first time you sync is special - the client sends all your tasks to the server. This is something you should only do once on only one device.
 
 ```bash
 $ task sync init
@@ -874,11 +874,11 @@ Syncing with host.domain:53589
 Sync successful.  2 changes uploaded.
 ```
 
+## Note
+
 You should get an indication that tasks were uploaded, in this case 2 of them.
 
-**Taskwarrior before Version 2.5.1**
-
-Please note that older Taskwarrior versions only sync the \textbf{pending} tasks and not all tasks.
+Please note that older Taskwarrior versions - before 2.5.1 - only sync the **pending** tasks and not all tasks.
 
 ---
 
