@@ -83,7 +83,7 @@ Before building the software, you will need to satisfy the dependencies by insta
 
 ## Note
 
-Note that some OSes (Darwin, FreeBSD ...) include `libuuid` functionality in libc, check the following slides for more detailed instructions.
+Note that some OSes (Darwin, FreeBSD ...) include `libuuid` functionality in `libc`, check the following slides for more detailed instructions.
 
 You don't necessarily need the latest version of all components, but it is a good idea if you can.  GnuTLS is a security component, and as such, it is very important that it is current.
 
@@ -91,7 +91,7 @@ You don't necessarily need the latest version of all components, but it is a goo
 
 ## Attention
 
-**Using GnuTLS version 2.12.x is neither adequately secure, nor production quality. Please check the slide describing the GnuTLS-Problems for details.**
+Using GnuTLS version 2.12.x is neither adequately secure, nor production quality. Please check the slide describing the GnuTLS-Problems for details.
 
 +++
 
@@ -104,9 +104,16 @@ We have detailed instructions for the following operating operating systems on t
 - Fedora
 - openSUSE
 - Ubuntu
+- MacOS
+
++++
+
+## Windows & others
+
+A note on other operating systems:
+
 - Windows with Cygwin (unsupported but working)
   - **Recommendation**: Use the Ubuntu subsystem in Windows 10 and follow the Ubuntu instructions.
-- MacOS
 
 In case you can add your operating system of choice, please send an email to [support@taskwarrior.org](mailto:support@taskwarrior.org) (Thank you!).
 
