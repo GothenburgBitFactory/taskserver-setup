@@ -778,7 +778,7 @@ You have now created a new user account on the server, created a new client cert
 - The organization, `Public`.
 - The full and proper user name, `First Last`.
 
----
++++
 
 ## Server address and port
 
