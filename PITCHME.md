@@ -820,9 +820,9 @@ $ task config taskd.key         - ~/.task/first_last.key.pem
 $ task config taskd.ca          - ~/.task/ca.cert.pem
 ```
 
----
++++
 
-## Configure Taskwarrior - Certificates
+## Configure Taskserver in Taskwarrior
 
 Now set the server info:
 
@@ -836,11 +836,9 @@ Finally we provide the credentials, which combine the organization, account name
 $ task config taskd.credentials - Public/First Last/cf31f287-ee9e-43a8-843e-e8bbd5de4294
 ```
 
----
++++
 
-## Taskwarrior - Trust Level
-
-**Trust**
+## Trust Level
 
 It is possible to configure Taskwarrior's trust level, which determines how the server certificate is treated.
 
