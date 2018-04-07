@@ -511,11 +511,10 @@ Now we create certificates and keys. The command below will generate all the cer
 
 ## Keys & Certificates (2)
 
-The certificate and key generation scripts make assumptions ***that are guaranteed to be wrong for you***. Specifically the `generate.server` script has a hard-coded `CN` entry that is not going to work. You ***need*** to edit the `vars` file, which you find in the `pki` subdirectory in your `SOURCEDIR`.
+The scripts make assumptions ***that are guaranteed to be wrong for you***. Specifically the `generate.server` script has a hard-coded `CN` entry that is not going to work. You ***need*** to edit the `vars` file, which you find in the `pki` subdirectory in your `SOURCEDIR`.
 
 ```bash
 CN=localhost
-...
 ```
 
 You will need to modify this value to match your server.
