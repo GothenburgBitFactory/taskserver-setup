@@ -755,7 +755,11 @@ This will generate a new key and cert, named `first_last.cert.pem` and `first_la
 
 ## Let's encrypt
 
-Certificates coming from Let's encrypt have **not** been successfully used by anyone. Please remember that Let's encrypt only generates servers, but we need a client certificate as well. A working scenario would be highly appreciated.
+Certificates coming from Let's encrypt have **not** been successfully used by anyone.
+
+Please remember that Let's encrypt only generates servers, but we need a client certificate as well.
+
+A working scenario would be highly appreciated.
 
 ---
 
