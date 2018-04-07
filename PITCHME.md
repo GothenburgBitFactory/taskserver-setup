@@ -942,7 +942,7 @@ If you do not respond with a sync, then local changes accumulate unseen by other
 
 # Getting Help
 
-+++
+---
 
 ## Troubleshooting Guide
 
@@ -964,7 +964,7 @@ We'll ask you to provide the `diagnostics` output for both Taskwarrior and Tasks
 
 There are several ways of getting help:
 
-- Submit your details to our [Q & A site](https://answers.tasktools.org), then wait patiently for the community to respond.
+- We have an [https://taskwarrior.org/support/faq.html](FAQ) covering a lot of questions.
 - Email us at [support@taskwarrior.org](mailto:support@taskwarrior.org), then wait patiently for a volunteer to respond.
 - Join us IRC in the \#taskwarrior channel on Freenode.net, and get a quick response from the community, where, as you have anticipated, we will walk you through the checklist above.
 - Even though Twitter is no means of support, you can get in touch with [@taskwarrior](https://twitter.com/taskwarrior).
