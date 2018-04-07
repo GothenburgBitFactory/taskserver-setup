@@ -842,9 +842,11 @@ $ task config taskd.credentials - Public/First Last/cf31f287-ee9e-43a8-843e-e8bb
 
 It is possible to configure Taskwarrior's trust level, which determines how the server certificate is treated.
 
-For Taskwarrior 2.4.0 you must specify `taskd.trust=ignore hostname` in order to skip certificate hostname validation. ***This is a bad idea***. You can also specify `taskd.trust=allow all` to perform no validation. ***This is a worse idea***. The default value is `taskd.trust=strict` which performs the most stringent verification, and is more secure.
+For Taskwarrior 2.4.0 and up you must specify `taskd.trust=ignore hostname` in order to skip certificate hostname validation. ***This is a bad idea***. You can also specify `taskd.trust=allow all` to perform no validation. ***This is a worse idea***. The default value is `taskd.trust=strict` which performs the most stringent verification, and is more secure.
 
 Your Taskwarrior is now ready to sync.
+
++++
 
 ## Note on Taskwarrior 2.3.0
 
