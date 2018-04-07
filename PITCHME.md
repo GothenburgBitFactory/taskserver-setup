@@ -527,7 +527,7 @@ Most probably the result of `hostname -f` is exactly what you need ("yourserver.
 
 The value of CN (Common Name) is important.
 
-It is this value against which Taskwarrior validates the servername, so use a value similar to `ack.tasktools.org`, which is what we use, but of course don't expect that to work for you. If you do not change this value, the only option for the client is to skip some or all certificate validation, ***which is a bad idea***.
+It is this value against which Taskwarrior validates the servername, so use a value similar to `ack.example.com`, don't expect that example to work for you. If you do not change this value, the only option for the client is to skip some or all certificate validation, ***which is a bad idea***.
 
 Go to your `SOURCEDIR`, which depends on which installation method you chose.
 
