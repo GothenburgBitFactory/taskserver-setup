@@ -326,9 +326,9 @@ Only under special circumstances you should build the unstable development versi
 
 +++
 
-## Special Circumstances (1)
+## General note
 
-The unstable development version is at no point guaranteed to work or even compile. The only time it does stabilize is right at the end of the development cycle, and in that case, you should wait until the release, so you are running a supported version.
+The unstable development version is at **no point** guaranteed to work or even compile. The only time it does stabilize is right at the end of the development cycle, and in that case, you should wait until the release.
 
 The stable version is always merged to the `master` branch, which is the default branch, so ordinarily nothing needs to be done. To build an unstable branch, first determine which branch by looking at the available branches:
 
