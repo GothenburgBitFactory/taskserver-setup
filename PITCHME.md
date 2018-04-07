@@ -61,11 +61,15 @@ Depending on what devices you use to access your server, you may need to configu
 
 ---
 
-## Installation
+## Installation (1)
 
 Installing Taskserver from a binary package is the simplest option, but you will need to refer to your package manager's documentation and procedures for doing this.
 
 Take a look at the [Download](http://taskwarrior.org/download/#dist) page for examples. Generally there are too many package managers to make a complete list with instructions here.
+
+---
+
+## Installation (2)
 
 Most importantly, for now, Taskserver is a new product, and there are very few packages available.  It is expected that this situation will change soon.  When it does, this page will be updated.
 
@@ -88,6 +92,10 @@ Before building the software, you will need to satisfy the dependencies by insta
 - `CMake` (2.8 or newer, check with)
 - `make`
 - A C++ Compiler (GCC 4.7 or Clang 3.0 or newer)
+
+---
+
+## Installation - Dependencies (note)
 
 Note that some OSes (Darwin, FreeBSD ...) include `libuuid` functionality in libc, check the following slides for more detailed instructions.
 
@@ -203,9 +211,10 @@ Start the [Cygwin](https://cygwin.com) GUI and install the following packages an
 Before building the software, you will need to satisfy the dependencies by installing the following:
 
 *TODO confirmation needed*
-    Install Xcode from Apple, via the AppStore, launch it, and select from some menu that you want the command line tools.
 
-    We expect you to have [http://brew.sh/}(Homebrew) installed on your Mac.
+Install Xcode from Apple, via the AppStore, launch it, and select from some menu that you want the command line tools.
+
+We expect you to have [http://brew.sh/}(Homebrew) installed on your Mac.
 
 ```bash
 $ brew install cmake
@@ -242,7 +251,6 @@ $ cmake -DCMAKE_BUILD_TYPE=release .
 $ make
 ...
 ```
-**`SOURCEDIR`**
 
 We will refer to the directory where you extracted the data to as `SOURCEDIR` (in the example above it is `taskd-latest`).
 
@@ -309,7 +317,7 @@ $ git clone https://git.tasktools.org/scm/tm/taskd.git taskd.git
 
 It is highly recommended that you build the stable version. This involves simply moving on to the next step.
 
-Only under special circumstances should you build the unstable development version.
+Only under special circumstances you should build the unstable development version.
 
 ---
 
@@ -375,8 +383,6 @@ $ make
 ...
 ```
 
-**`SOURCEDIR`**
-
 In this case the `SOURCEDIR` is `taskd.git`.
 
 ---
@@ -417,8 +423,8 @@ $ sudo make install
 ---
 
 ## Verify your Installation
-    \vfill
-    Run the `taskd` command to verify that the server is installed, and the location is in your `$PATH`. You should see something like this:
+
+Run the `taskd` command to verify that the server is installed, and the location is in your `$PATH`. You should see something like this:
 
 ```bash
 $ taskd
@@ -435,9 +441,7 @@ Usage: taskd -v|--version
 
 ## taskd-User
 
-**All configuration is done with the taskd-User**
-
-We assume that you will do all configuration with the taskd user you chose to run the server with.
+**We assume that you will do all configuration with the taskd user you chose to run the server with.**
 
 ---
 
@@ -473,8 +477,6 @@ taskd config server localhost:53589
 
 Created /var/taskd
 ```
-
-**pki directory**
 
 It is a good idea to copy the `pki` subdirectory from your `SOURCEDIR` to your `TASKDDATA` directory.
 
