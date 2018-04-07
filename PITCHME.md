@@ -653,7 +653,11 @@ With a `debug.tls` setting that is non-zero, you see lots of security-related di
 
 ## systemd unit file
 
-You can start Taskserver using a systemd-unitfile (called `taskd.service`) like the following (please add the contents of `$TASKDDATA` not the variable itself). Running the Taskserver as root is not recommended, please add an appropriate user and group to run the daemon with (`$TASKDUSER` and `$TASKDGROUP`).
+You can start Taskserver using a systemd-unitfile (called `taskd.service`) like the one on the next slide (please add the contents of `$TASKDDATA` not the variable itself). Running the Taskserver as root is not recommended, please add an appropriate user and group to run the daemon with (`$TASKDUSER` and `$TASKDGROUP`).
+
++++
+
+## taskd.service
 
 ```bash
 [Unit]
@@ -676,9 +680,9 @@ ReadOnlyDirectories=/etc /usr
 WantedBy=multi-user.target
 ```
 
----
++++
 
-## Server - Control with systemd
+## Control with systemd
 
 Afterwards prepare systemd to recognise the file. The following commands need to be run as root-user.
 
