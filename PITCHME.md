@@ -188,21 +188,6 @@ $ sudo apt install gnutls-utils
 
 +++
 
-## Windows
-
-Before building the software, you will need to satisfy the dependencies by installing the following:
-
-Start the [Cygwin](https://cygwin.com) GUI and install the following packages and their dependencies.
-
-- `GnuTLS`
-- `libuuid`
-- `CMake`
-- `make`
-- `gcc-c++`
-- `gnutls-utils`
-
-+++
-
 ## MacOS
 
 Before building the software, you will need to satisfy the dependencies by installing the following:
@@ -218,6 +203,21 @@ $ brew install cmake
 $ brew install git
 $ brew install gnutls
 ```
+
++++
+
+## Windows
+
+Before building the software, you will need to satisfy the dependencies by installing the following:
+
+Start the [Cygwin](https://cygwin.com) GUI and install the following packages and their dependencies.
+
+- `GnuTLS`
+- `libuuid`
+- `CMake`
+- `make`
+- `gcc-c++`
+- `gnutls-utils`
 
 ---
 
