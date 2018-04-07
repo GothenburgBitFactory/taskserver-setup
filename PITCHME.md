@@ -121,7 +121,7 @@ In case you can add your operating system of choice, please send an email to [su
 
 ### CentOS
 
-Before building the software, you will need to satisfy the dependencies by installing the following:
+Install dependencies:
 
 ```bash
 $ sudo yum install gcc-c++
@@ -135,7 +135,7 @@ $ sudo yum install gnutls-utils
 
 ## Debian
 
-Before building the software, you will need to satisfy the dependencies by installing the following:
+Install dependencies:
 
 ```bash
 $ sudo apt install g++
@@ -149,7 +149,7 @@ $ sudo apt install gnutls-utils
 
 ## Fedora
 
-Before building the software, you will need to satisfy the dependencies by installing the following:
+Install dependencies:
 
 ```bash
 $ sudo dnf install gcc-c++
@@ -162,7 +162,7 @@ $ sudo dnf install gnutls-utils
 
 ## openSUSE
 
-Before building the software, you will need to satisfy the dependencies by installing the following:
+Install dependencies:
 
 ```bash
 $ sudo zypper install gcc-c++
@@ -176,7 +176,7 @@ $ sudo zypper install gnutls-utils
 
 ## Ubuntu
 
-Before building the software, you will need to satisfy the dependencies by installing the following:
+Install dependencies:
 
 ```bash
 $ sudo apt install g++
@@ -189,8 +189,6 @@ $ sudo apt install gnutls-utils
 +++
 
 ## MacOS
-
-Before building the software, you will need to satisfy the dependencies by installing the following:
 
 *TODO confirmation needed*
 
