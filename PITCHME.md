@@ -326,11 +326,15 @@ Only under special circumstances you should build the unstable development versi
 
 +++
 
-## General note
+## Special circumstances
 
 The unstable development version is at **no point** guaranteed to work or even compile. The only time it does stabilize is right at the end of the development cycle, and in that case, you should wait until the release.
 
 The stable version is always merged to the `master` branch, which is the default branch, so ordinarily nothing needs to be done. To build an unstable branch, first determine which branch by looking at the available branches:
+
++++
+
+## Choosing the right branch
 
 ```bash
 $ cd taskserver.git
@@ -343,15 +347,11 @@ $ git branch -a
   remotes/origin/master
 ```
 
-+++
-
-## Special Circumstances (2)
-
 The convention we use is that `master` represents the stable release.  The numbered branches represent the latest development (1.2.0, the 'highest' branch number, ending in '.0') and a patch branch (1.1.1, ending in a non-zero number).
 
 +++
 
-## Special Circumstances (3)
+## Submodules
 
 Patch branches are reserved for emergency releases, so in this example you would choose to build 1.2.0 as the latest development branch like this (please not that starting with version 1.2.0 we make use of submodules):
 
