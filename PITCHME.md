@@ -573,7 +573,7 @@ There are the server key/certs, which are used to authenticate the server and en
 
 Finally there are client key/certs, which are not what you might  expect. These are for API access, and not for your Taskwarrior client. Those are created later.
 
-+++
+---
 
 ## Other Configuration
 
@@ -585,6 +585,10 @@ $ taskd config --force log $PWD/taskd.log
 $ taskd config --force pid.file $PWD/taskd.pid
 $ taskd config --force server localhost:53589
 ```
+
++++
+
+## Verify
 
 Note that we have chosen `localhost:53589`, but this choice has consequences. The name `localhost` is not network visible, which limits the server to only serving clients on the same machine. Use your full machine name for proper network addressability.
 
@@ -602,21 +606,15 @@ $ man taskdrc
 
 ---
 
-## Server - Control
+## Control Server
 
 You can now to launch the server:
 
 ```bash
-$ taskdctl start
+$ taskdctl start # analogue stop to stop the server
 ```
 
 This command launched the server as a daemon process. This command requires the `TASKDDATA` variable.  Your server is now running, and ready for syncing.
-
-Note that to stop the server, you use:
-
-```bash
-$ taskdctl stop
-```
 
 Check that your server is running by looking in the `taskd.log` file, or running this:
 
