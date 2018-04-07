@@ -8,7 +8,7 @@ Please follow the steps **carefully** and **note** all things you do differently
 
 # Preparation
 
----
++++
 
 ## Preparation - Backup Your Data
 
@@ -21,13 +21,13 @@ $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *
 
 Now move that file to somewhere safe. All software contains bugs, so make regular backups.
 
----
++++
 
 ## Attention
 
 This is not only due to a good habit, we will modify your data, so a backup is highly recommended.
 
----
++++
 
 ## Preparation - Choose A  Machine
 
@@ -37,19 +37,19 @@ If your machine is not continuously available, it can still be a suitable Taskse
 
 A laptop is a poor choice for a Taskserver host.
 
----
++++
 
 ## Preparation - Choose A Port
 
 By default, Taskserver uses port 53589. You can choose any port you wish, provided it is unused. If you choose a port number that is under 1024, then Taskserver must run as root, which is not recommended.
 
----
++++
 
 ## Preparation - User/Group
 
 Ideally you will create a new user and group solely to run the Taskserver. This helps you keep the data secure from other users on the machine, as well as controlling the privileges of Taskserver.
 
----
++++
 
 ## Preparation - Firewall
 
