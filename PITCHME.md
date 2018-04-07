@@ -67,17 +67,9 @@ Installing Taskserver from a binary package is the simplest option, but you will
 
 Take a look at the [Download](http://taskwarrior.org/download/#dist) page for examples. Generally there are too many package managers to make a complete list with instructions here.
 
-+++
-
-## Availability
-
-Most importantly, for now, Taskserver is a new product, and there are very few packages available.  It is expected that this situation will change soon.  When it does, this page will be updated.
-
-Meanwhile, there is installation from either git or tarball.
-
 ---
 
-## Dependencies (general)
+## Dependencies
 
 Before building the software, you will need to satisfy the dependencies by installing the following:
 
@@ -89,17 +81,21 @@ Before building the software, you will need to satisfy the dependencies by insta
 
 +++
 
-## Dependencies (note)
+## Note
 
 Note that some OSes (Darwin, FreeBSD ...) include `libuuid` functionality in libc, check the following slides for more detailed instructions.
 
 You don't necessarily need the latest version of all components, but it is a good idea if you can.  GnuTLS is a security component, and as such, it is very important that it is current.
 
-**Using GnuTLS version 2.12.x is neither adequately secure, nor production quality. Please check the slide describing the GnuTLS-Problem for details.**
++++
+
+## Attention
+
+**Using GnuTLS version 2.12.x is neither adequately secure, nor production quality. Please check the slide describing the GnuTLS-Problems for details.**
 
 +++
 
-## Dependencies (OS)
+## Operating Systems
 
 We have detailed instructions for the following operating operating systems on the following slides:
 
