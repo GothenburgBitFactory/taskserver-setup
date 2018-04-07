@@ -252,7 +252,7 @@ We will refer to the directory where you extracted the data to as `SOURCEDIR` (i
 
 +++
 
-## Installation - Build Again
+## Build Again
 
 If you ever want to build the software again, do some cleanup.
 
@@ -266,7 +266,7 @@ $ rm CMakeCache.txt
 
 +++
 
-## Installation - make install
+## make install
 
 Now install Taskserver.  This copies files into the right place, and installs man pages.
 
@@ -277,7 +277,7 @@ $ sudo make install
 
 +++
 
-## Installation - Verify installation
+## Verify installation
 
 Run the `taskd` command to verify that the server is installed, and the location is in your `$PATH`.
 
@@ -290,7 +290,7 @@ Usage: taskd -v|--version
 ...
 ```
 
-+++
+---
 
 ## Installation from Git-Repository
 
