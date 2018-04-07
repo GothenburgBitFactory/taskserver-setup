@@ -533,7 +533,7 @@ Go to your `SOURCEDIR`, which depends on which installation method you chose.
 
 +++
 
-## Keys & Certificates (4)
+## Copy the certificates
 
 Here is is assumed that you installed from the source tarball.
 
@@ -552,7 +552,7 @@ $ cp ca.cert.pem     $TASKDDATA
 
 +++
 
-## Keys & Certificates (5)
+## Configure taskserver
 
 ```bash
 $ taskd config --force client.cert $TASKDDATA/client.cert.pem
@@ -565,7 +565,7 @@ $ taskd config --force ca.cert     $TASKDDATA/ca.cert.pem
 
 +++
 
-## Keys & Certificates (6)
+## Explanation
 
 There are three classes of key/cert here. There is the CA (Certificate Authority) cert, which has cert signing capabilities and is used to sign and verify the other certs.
 
