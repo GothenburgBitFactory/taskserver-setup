@@ -759,7 +759,7 @@ Certificates coming from Let's encrypt have **not** been successfully used by an
 
 ---
 
-## Client Configuration
+## Taskwarrior Configuration
 
 You have now created a new user account on the server, created a new client cert and key, and have details that need to be transferred to the user, to set up a sync client.  The details needed are:
 
@@ -771,9 +771,9 @@ You have now created a new user account on the server, created a new client cert
 - The full and proper user name, \verb+First Last+.
 - The server address and port, `host.domain:53589`. In the \hyperlink{serverconfiguration}{server configuration} we used `localhost` as an example. Whatever you actually used there, should be used here.
 
----
++++
 
-## Configure Taskwarrior - Certificates
+## Certificates
 
 If you have configured Taskserver and created a user account (or better yet, someone created an account for you) then you now have details needed in the configuration of your Taskwarrior client. You should have the files and information mentioned on the \hyperlink{clientconfiguration}{last slide}.
 
