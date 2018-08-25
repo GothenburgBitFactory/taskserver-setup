@@ -833,7 +833,7 @@ $ task config taskd.server      -- host.domain:53589
 Finally we provide the credentials, which combine the organization, account name and user key:
 
 ```bash
-$ task config taskd.credentials - Public/First Last/cf31f287-ee9e-43a8-843e-e8bbd5de4294
+$ task config taskd.credentials Public/First Last/cf31f287-ee9e-43a8-843e-e8bbd5de4294
 ```
 
 Your Taskwarrior is now ready to sync.
