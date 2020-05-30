@@ -468,7 +468,7 @@ A location for the data must be chosen and created. The `TASKDDATA` environment 
 
 ```bash
 $ export TASKDDATA=/var/taskd
-$ mkdir -p $TASKDDATA
+$ sudo mkdir -p $TASKDDATA
 ```
 
 If the `TASKDDATA` variable is not set, then most `taskd` commands require the `--data ...` argument.
