@@ -1,0 +1,27 @@
+{
+  "name": "taskserver-setup",
+  "version": "1.0.0",
+  "description": "A guide on how to set up the Taskserver",
+  "main": "index.js",
+  "scripts": {
+    "slides": "web-dev-server --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gothenburgbitfactory/taskserver-setup.git"
+  },
+  "keywords": [
+    "taskserver",
+    "taskwarrior"
+  ],
+  "author": "Gothenburg Bit Factory",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gothenburgbitfactory/taskserver-setup/issues"
+  },
+  "homepage": "https://github.com/gothenburgbitfactory/taskserver-setup#readme",
+  "dependencies": {
+    "@web/dev-server": "^0.1.8",
+    "reveal.js": "^4.1.0"
+  }
+}

@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/beige.css">
+  <link rel="stylesheet" href="node_modules/reveal.js/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="css/styles.css"/>
+  <title>Taskserver Setup Guide</title>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <section>
+      <h1>Taskserver Setup</h1>
+      <p>
+        This guide leads you through all the necessary steps to setup your own Taskserver to sync your Taskwarrior-tasks.
+      </p>
+      <p>
+        Please follow the steps <strong>carefully</strong> and <strong>note</strong> all things you do differently.
+      </p>
+    </section>
+    <section>
+      <section>
+        <h1>Preparation</h1></section>
+      <section>
+        <h2>Backup Your Data</h2>
+        <p>
+          Let's reinforce a good habit and make a backup copy of your data first.
+          Here is a very easy way to backup your data:
+        </p>
+        <pre><code data-trim class="bash">
+          $ cd ~/.task
+          $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *
+        </code></pre>
+        <p>
+          Now move that file to somewhere safe.
+          All software contains bugs, so make regular backups.
+        </p>
+      </section>
+      <section>
+        <h2>Attention</h2>
+        <p>
+          This is not only due to a good habit, we will modify your data, so a backup is highly recommended.
+        </p>
+      </section>
+      <section>
+        <h2>Choose A Machine</h2>
+        <p>
+          A suitable machine to run your Taskserver is one that is always available.
+          If you have such a machine, or have access to a hosted machine, that is ideal.
+        </p>
+        <p>
+          If your machine is not continuously available, it can still be a suitable Taskserver because the sync mechanism doesn't require continuous access.
+          When a client cannot sync, it simply accumulates local, unpropagated changes until it can sync.
+        </p>
+        <p>
+          A laptop is a poor choice for a Taskserver host.
+        </p>
+      </section>
+      <section>
+        <h2>Choose A Port</h2>
+        <p>
+          By default, Taskserver uses port 53589.
+          You can choose any port you wish, provided it is unused.
+          If you choose a port number that is under 1024, then Taskserver must run as root, which is not
+          recommended.
+        </p>
+      </section>
+      <section>
+        <h2>User & Group</h2>
+        <p>
+          Ideally you will create a new user and group solely to run the Taskserver.
+          This helps you keep the data secure from other users on the machine, as well as controlling the privileges of
+          Taskserver.
+        </p>
+      </section>
+      <section>
+        <h2>Firewall</h2>
+        <p>
+          Depending on what devices you use to access your server, you may need to configure the firewall to allow incoming TCP/IP traffic on your chosen port.
+        </p>
+      </section>
+    </section>
+    <section>
+      <h1>Installation</h1>
+    </section>
+    <section>
+      <h2>Installation from a package</h2>
+      <p>
+        Installing Taskserver from a binary package is the simplest option, but you will need to refer to your package manager's documentation and procedures for doing this.
+      </p>
+      <p>
+        Take a look at the <a href="http://taskwarrior.org/download/#dist">Download</a> page for examples.
+        Generally there are too many package managers to make a complete list with instructions here.
+      </p>
+    </section>
+    <section>
+      <section>
+        <h2>Dependencies</h2>
+        <p>
+          Before building the software, you will need to satisfy the dependencies by installing the following:
+        </p>
+        <ul>
+          <li><code>GnuTLS</code> (ideally version 3.2 or newer)</li>
+          <li><code>libuuid</code></li>
+          <li><code>CMake</code> (2.8 or newer, check with)</li>
+          <li><code>make</code></li>
+          <li>A C++ Compiler (GCC 4.7 or Clang 3.0 or newer)</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Note</h2>
+        <p>
+          Note that some OSes (Darwin, FreeBSD ...) include <code>libuuid</code> functionality in <code>libc</code>, check the following slides for more detailed instructions.
+        </p>
+        <p>
+          You don't necessarily need the latest version of all components, but it is a good idea if you can.
+          GnuTLS is a security component, and as such, it is very important that it is current.
+        </p>
+      </section>
+      <section>
+        <h2>Attention</h2>
+        <p>
+          Using GnuTLS version 2.12.x is neither adequately secure, nor production quality.
+          Please check the slide describing the GnuTLS-Problems for details.
+        </p>
+      </section>
+      <section>
+        <h2>Operating Systems</h2>
+        <p>
+          We have detailed instructions for the following operating operating systems on the following slides:
+        </p>
+        <ul>
+          <li>CentOS</li>
+          <li>Debian</li>
+          <li>Fedora</li>
+          <li>openSUSE</li>
+          <li>Ubuntu</li>
+          <li>MacOS</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Windows & others</h2>
+        <p>
+          A note on other operating systems:
+        </p>
+        <ul>
+          <li>Windows with Cygwin (unsupported but working)</li>
+          <li><strong>Recommendation</strong>: Use the Ubuntu subsystem in Windows 10 and follow the Ubuntu instructions.</li>
+        </ul>
+        <p>
+          In case you can add your operating system of choice, please send an email to <a href="mailto:support@taskwarrior.org">support@taskwarrior.org</a> (Thank you!).
+        </p>
+      </section>
+      <section>
+        <h3>CentOS</h3>
+        <p>
+          Install dependencies:
+        </p>
+        <pre><code data-trim class="bash">
+        $ sudo yum install gcc-c++
+        $ sudo yum install gnutls-devel
+        $ sudo yum install libuuid-devel
+        $ sudo yum install cmake
+        $ sudo yum install gnutls-utils
+        </code></pre>
+      </section>
+      <section>
+        <h2>Debian</h2>
+        <p>
+          Install dependencies:
+        </p>
+        <pre><code data-trim class="bash">
+        $ sudo apt install g++
+        $ sudo apt install libgnutls28-dev
+        $ sudo apt install uuid-dev
+        $ sudo apt install cmake
+        $ sudo apt install gnutls-utils
+        </code></pre>
+      </section>
+      <section>
+        <h2>Fedora</h2>
+        <p>
+          Install dependencies:
+        </p>
+        <pre><code data-trim class="bash">
+        $ sudo dnf install gcc-c++
+        $ sudo dnf install gnutls-devel
+        $ sudo dnf install libuuid-devel
+        $ sudo dnf install cmake
+        $ sudo dnf install gnutls-utils
+        </code></pre>
+      </section>
+      <section>
+        <h2>openSUSE</h2>
+        <p>
+          Install dependencies:
+        </p>
+        <pre><code data-trim class="bash">
+        $ sudo zypper install gcc-c++
+        $ sudo zypper install libgnutls-devel
+        $ sudo zypper install libuuid-devel
+        $ sudo zypper install cmake
+        $ sudo zypper install gnutls-utils
+        </code></pre>
+      </section>
+      <section>
+        <h2>Ubuntu</h2>
+        <p>
+          Install dependencies:
+        </p>
+        <pre><code data-trim class="bash">
+        $ sudo apt install g++
+        $ sudo apt install libgnutls28-dev
+        $ sudo apt install uuid-dev
+        $ sudo apt install cmake
+        $ sudo apt install gnutls-utils
+        </code></pre>
+      </section>
+      <section>
+        <h2>MacOS</h2>
+        <p>
+          Install Xcode from Apple, via the AppStore, launch it, and select from some menu that you want the command line tools.
+        </p>
+        <p>
+          We expect you to have <a href="http://brew.sh/">Homebrew</a> installed on your Mac.
+        </p>
+        <pre><code data-trim class="bash">
+        $ brew install cmake
+        $ brew install git
+        $ brew install gnutls
+        </code></pre>
+      </section>
+      <section>
+        <h2>Windows</h2>
+        <p>
+          Start the <a href="https://cygwin.com">Cygwin</a> GUI and install the following packages and their dependencies.
+        </p>
+        <ul>
+          <li><code>GnuTLS</code></li>
+          <li><code>libuuid</code></li>
+          <li><code>CMake</code></li>
+          <li><code>make</code></li>
+          <li><code>gcc-c++</code></li>
+          <li><code>gnutls-utils</code></li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Installation from a tarball</h2>
+        <p>
+          Installing Taskserver from a tarball is a matter of downloading the tarball, extracting it, satisfying dependencies and building the server.
+        </p>
+      </section>
+      <section>
+        <h2>Download</h2>
+        <p>
+          The next step is to obtain the code.
+          This means getting the Task Server 1.1.0 (or newer) source tarball.
+          You should check for the latest stable release here:
+        </p>
+        <p>
+            <a href="http://taskwarrior.org/download/">http://taskwarrior.org/download/</a>
+          </p>
+          <p>
+            You can download the tarball with <code>curl</code>, as an example of just one of many ways to download the tarball.
+          </p>
+          <pre><code data-trim class="bash">
+          $ curl -LO https://taskwarrior.org/download/taskd-latest.tar.gz
+          </code></pre>
+        </section>
+        <section>
+          <h2>Build</h2>
+          <p>
+            Expand the tarball, and build the Taskserver.
+          </p>
+          <pre><code data-trim class="bash">
+          $ tar xzf taskd-latest.tar.gz
+          $ cd taskd-latest
+          $ cmake -DCMAKE_BUILD_TYPE=release .
+          ...
+          $ make
+          ...
+          </code></pre>
+          <p>
+            We will refer to the directory where you extracted the data to as <code>SOURCEDIR</code> (in the example above it is <code>taskd-latest</code>).
+          </p>
+        </section>
+        <section>
+          <h2>Build Again</h2>
+          <p>
+            If you ever want to build the software again, do some cleanup.
+          </p>
+          <pre><code data-trim class="bash">
+          $ cd taskd-latest
+          $ make clean
+          ...
+          $ rm CMakeCache.txt
+          ...
+          </code></pre>
+        </section>
+        <section>
+          <h2>make install</h2>
+          <p>
+            Now install Taskserver.
+            This copies files into the right place, and installs man pages.
+          </p>
+          <pre><code data-trim class="bash">
+          $ sudo make install
+          ...
+          </code></pre>
+        </section>
+        <section>
+          <h2>Verify installation</h2>
+          <p>
+            Run the <code>taskd</code> command to verify that the server is installed, and the location is in your <code>$PATH</code>.
+          </p>
+          <p>
+            You should see something like this:
+          </p>
+          <pre><code data-trim class="bash">
+          $ taskd
+
+          Usage: taskd -v|--version
+          ...
+          </code></pre>
+        </section>
+      </section>
+    <section>
+      <section>
+        <h2>Installation from Git-Repository</h2>
+        <p>
+          Installing Taskserver from git is a matter of cloning the git repository and building the server.
+        </p>
+        <p>
+          The same dependencies as for installation from tarball apply.
+          Please check the corresponding slides.
+        </p>
+      </section>
+      <section>
+        <h2>Cloning the repository</h2>
+        <p>
+          Now clone the repository like this:
+        </p>
+          <pre><code data-trim class="bash">
+          $ git clone --recurse-submodules=yes \
+                https://github.com/GothenburgBitFactory/taskserver.git \
+                taskserver.git
+          ...
+          </code></pre>
+        </section>
+        <section>
+          <h2>Use stable!</h2>
+          <p>
+            It is highly recommended that you build the stable version.
+            This involves simply executing the next command.
+          </p>
+          <pre><code data-trim class="bash">
+          $ cd taskserver.git
+
+          $ git checkout master
+          ...
+          </code></pre>
+          <p>
+            Only under special circumstances you should build the unstable development version.
+          </p>
+        </section>
+        <section>
+          <h2>Special circumstances</h2>
+          <p>
+            The unstable development version is at <strong>no point</strong> guaranteed to work or even compile.
+            The only time it does stabilize is right at the end of the development cycle, and in that case, you should wait until the release.
+          </p>
+          <p>
+            The stable version is always merged to the <code>master</code> branch, which is the default branch, so ordinarily nothing needs to be done.
+            To build an unstable branch, first determine which branch by looking at the available branches:
+          </p>
+        </section>
+        <section>
+          <h2>Choosing the right branch</h2>
+          <pre><code data-trim class="bash">
+          $ cd taskserver.git
+          $ git branch -a
+          * master
+          remotes/origin/1.1.0
+          remotes/origin/1.1.1
+          remotes/origin/1.2.0
+          remotes/origin/HEAD -> origin/master
+          remotes/origin/master
+          </code></pre>
+          <p>
+            The convention we use is that <code>master</code> represents the stable release.
+            The numbered branches represent the latest development (1.2.0, the 'highest' branch number, ending in '.0') and a patch branch (1.1.1, ending in a non-zero number).
+          </p>
+        </section>
+        <section>
+          <h2>Development version</h2>
+          <p>
+            Patch branches are reserved for emergency releases, so in this example you would choose to build 1.2.0 as the latest development branch like this (please not that starting with version 1.2.0 we make use of submodules).
+          </p>
+          <pre><code data-trim class="bash">
+          $ git checkout 1.2.0
+          Branch 1.2.0 set up to track remote branch 1.2.0 from origin.
+          Switched to a new branch '1.2.0'
+          </code></pre>
+        </section>
+        <section>
+          <h2>Submodules</h2>
+          <pre><code data-trim class="bash">
+          $ git submodule init
+          Submodule 'src/libshared' (https://git.tasktools.org/scm/tm/libshared.git) registered for path 'src/libshared'
+
+          $ git submodule update
+          Cloning into 'src/libshared'...
+          remote: Counting objects: 2180, done.
+          remote: Compressing objects: 100% (1379/1379), done.
+          remote: Total 2180 (delta 1641), reused 1018 (delta 796)
+          Receiving objects: 100% (2180/2180), 369.13 KiB | 554.00 KiB/s, done.
+          Resolving deltas: 100% (1641/1641), done.
+          Checking connectivity...
+          done.
+          Submodule path 'src/libshared': checked out '2b0b70d90acb9a3ff3548befab9db8beb85a0c2d'
+          </code></pre>
+        </section>
+        <section>
+          <h2>Build from Git</h2>
+          <p>
+            Now build the Taskserver.
+          </p>
+          <pre><code data-trim class="bash">
+          $ cd taskserver.git
+          $ cmake -DCMAKE_BUILD_TYPE=release .
+          ...
+          $ make
+          ...
+          </code></pre>
+          <p>
+            In this case the <code>SOURCEDIR</code> is <code>taskserver.git</code>.
+          </p>
+        </section>
+        <section>
+          <h2>Test your build</h2>
+          <p>
+            Having built the server, now build and run the unit tests.
+            Although this is an optional step, it is a good idea to know whether the build works on your platform.
+          </p>
+          <pre><code data-trim class="bash">
+          $ cd test # from SOURCEDIR
+          $ make
+          ...
+          $ ./run_all
+
+          Pass: 2920
+          Fail: 0
+          Skipped: 0
+          Runtime: 1 seconds
+
+          $ cd ..
+          </code></pre>
+        </section>
+        <section>
+          <h2>Interprete the results</h2>
+          <p>
+            This example shows that all 2,920 tests pass.
+            If you see test failures, stop and report them.
+          </p>
+          <p>
+            Note that there are some unit tests that fail if you have not built the latest commit.
+            Seeing 4 test failures may mean all is well.
+            Seeing 30 failures does not.
+          </p>
+        </section>
+        <section>
+          <h2>make install</h2>
+          <p>
+            Now install Taskserver.
+            This copies files into the right place, and installs man pages.
+          </p>
+          <pre><code data-trim class="bash">
+          $ sudo make install
+          ...
+          </code></pre>
+        </section>
+        <section>
+          <h2>Verify your Installation</h2>
+          <p>
+            Run the <code>taskd</code> command to verify that the server is installed, and the location is in your <code>$PATH</code>.
+            You should see something like this:
+          </p>
+          <pre><code data-trim class="bash">
+          $ taskd
+
+          Usage: taskd -v|--version
+          ...
+          </code></pre>
+        </section>
+      </section>
+    <section>
+      <h1>Server Setup</h1>
+    </section>
+    <section>
+      <section>
+        <h2>taskd-User</h2>
+        <p>
+          We assume that you will do all configuration with the taskd user you chose to run the server with.
+        </p>
+      </section>
+      <section>
+        <h2>Data Location</h2>
+        <p>
+          Configuring the server is straightforward, but needs a little planning.
+        </p>
+        <p>
+          A location for the data must be chosen and created.
+          The <code>TASKDDATA</code> environment variable will be used to indicate that location to all the <code>taskd</code> commands.
+        </p>
+        <pre><code data-trim class="bash">
+          $ export TASKDDATA=/var/taskd
+          $ sudo mkdir -p $TASKDDATA
+        </code></pre>
+        <p>
+          If the <code>TASKDDATA</code> variable is not set, then most <code>taskd</code> commands require the <code>--data ...</code> argument.
+        </p>
+      </section>
+      <section>
+        <h2>Directory</h2>
+        <strong>Everything the server does will be confined to that directory.</strong>
+        <p>
+          There are two 'D's in <code>TASKDDATA</code>, and omitting one is a common mistake.
+        </p>
+        <p>
+          The user that will run the server must have write permissions in that directory.
+        </p>
+      </section>
+      <section>
+        <h2>Initialization</h2>
+        <p>
+          Now we let the server initialize that directory:
+        </p>
+        <pre><code data-trim class="bash">
+          $ taskd init
+          You must specify the 'server' variable, for example:
+          taskd config server localhost:53589
+
+          Created /var/taskd
+        </code></pre>
+        <p>
+          It is a good idea to copy the <code>pki</code> subdirectory from your <code>SOURCEDIR</code> to your <code>TASKDDATA</code> directory.
+        </p>
+        <p>
+          If you installed from a package (manager) search for the pki directory, <code>find / -name pki -type d</code> (example <code>/usr/share/taskd/pki/</code> for Ubuntu).
+        </p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Keys & Certificates</h2>
+          <p>
+            Now we create certificates and keys.
+            The command below will generate all the certs and keys for the server, but this uses self-signed certificates, and this is not recommended for production use.
+            This is for personal use, and this may be acceptable for you, but if not, you will need to purchase a proper certificate and key, backed by a certificate authority.
+          </p>
+        </section>
+        <section>
+          <h2>Assumptions</h2>
+          <p>
+            The scripts make assumptions <strong>that are guaranteed to be wrong for you</strong>.
+            Specifically the <code>generate.server</code> script has a hard-coded <code>CN</code> entry that is not going to work.
+            You <strong>need</strong> to edit the <code>vars</code> file, which you find in the <code>pki</code> subdirectory in your <code>SOURCEDIR</code>.
+          </p>
+          <pre><code data-trim class="bash">
+          CN=localhost
+          </code></pre>
+          <p>
+            You will need to modify this value to match your server.
+          </p>
+          <p>
+            Most probably the result of <code>hostname -f</code> is exactly what you need ("yourserver.example.com").
+          </p>
+        </section>
+        <section>
+          <h2>Common Name</h2>
+          <p>
+            The value of CN (Common Name) is important.
+          </p>
+          <p>
+            It is this value against which Taskwarrior validates the servername, so use a value similar to <code>ack.example.com</code>, don't expect that example to work for you.
+            If you do not change this value, the only option for the client is to skip some or all certificate validation, <strong>which is a bad idea</strong>.
+          </p>
+          <p>
+            Go to your <code>SOURCEDIR</code>, which depends on which installation method you chose.
+          </p>
+        </section>
+        <section>
+          <h2>Copy the certificates</h2>
+          <p>
+            Here is is assumed that you installed from the source tarball.
+          </p>
+          <pre><code data-trim class="bash">
+          $ cd ~/taskd-1.1.0/pki
+          $ ./generate
+          ...
+
+          $ cp client.cert.pem $TASKDDATA
+          $ cp client.key.pem $TASKDDATA
+          $ cp server.cert.pem $TASKDDATA
+          $ cp server.key.pem $TASKDDATA
+          $ cp server.crl.pem $TASKDDATA
+          $ cp ca.cert.pem $TASKDDATA
+          </code></pre>
+        </section>
+        <section>
+          <h2>Configure taskserver</h2>
+          <pre><code data-trim class="bash">
+          $ taskd config --force client.cert $TASKDDATA/client.cert.pem
+          $ taskd config --force client.key $TASKDDATA/client.key.pem
+          $ taskd config --force server.cert $TASKDDATA/server.cert.pem
+          $ taskd config --force server.key $TASKDDATA/server.key.pem
+          $ taskd config --force server.crl $TASKDDATA/server.crl.pem
+          $ taskd config --force ca.cert $TASKDDATA/ca.cert.pem
+          </code></pre>
+        </section>
+        <section>
+          <h2>Explanation</h2>
+          <p>
+            There are three classes of key/cert here.
+            There is the CA (Certificate Authority) cert, which has cert signing capabilities and is used to sign and verify the other certs.
+          </p>
+          <p>
+            There are the server key/certs, which are used to authenticate the server and encrypt.
+          </p>
+          <p>
+            Finally there are client key/certs, which are not what you might expect.
+            These are for API access, and not for your Taskwarrior client.
+            Those are created later.
+          </p>
+        </section>
+      </section>
+    <section>
+      <section>
+        <h2>Other Configuration</h2>
+        <p>
+          Now we configure some basic details for the server.
+          The chosen port is 53589.
+          Note that we allow Taskwarrior clients specifically.
+        </p>
+        <pre><code data-trim class="bash">
+          $ cd $TASKDDATA/..
+          $ taskd config --force log $PWD/taskd.log
+          $ taskd config --force pid.file $PWD/taskd.pid
+          $ taskd config --force server localhost:53589
+        </code></pre>
+      </section>
+      <section>
+        <h2>Verify</h2>
+        <p>
+          Note that we have chosen <code>localhost:53589</code>, but this choice has consequences.
+          The name <code>localhost</code> is not network visible, which limits the server to only serving clients on the same machine.
+          Use your full machine name for proper network addressability.
+        </p>
+        <p>
+          You can look at all the configuration settings:
+        </p>
+        <pre><code data-trim class="bash">
+          $ taskd config
+        </code></pre>
+        <p>
+          You can view all the supported settings with:
+        </p>
+        <pre><code data-trim class="bash">
+          $ man taskdrc
+        </code></pre>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Control Server</h2>
+          <p>
+            You can now to launch the server:
+          </p>
+          <pre><code data-trim class="bash">
+          $ taskdctl start # analogue stop to stop the server
+          </code></pre>
+          <p>
+            This command launched the server as a daemon process.
+            This command requires the <code>TASKDDATA</code> variable.
+            Your server is now running, and ready for syncing.
+          </p>
+          <p>
+            Check that your server is running by looking in the <code>taskd.log</code> file, or running this:
+          </p>
+          <pre><code data-trim class="bash">
+          $ ps -leaf | grep taskd
+          </code></pre>
+        </section>
+        <section>
+          <h2>Interactive or Non-Daemon Server</h2>
+          <p>
+            A daemon server is typically how you would want to run Taskserver, but there may be times when you need to run the server attached to a terminal.
+            These two commands are identical:
+          </p>
+          <pre><code data-trim class="bash">
+          $ taskdctl start
+          $ taskd server --data $TASKDDATA --daemon
+          </code></pre>
+          <p>
+            By omitting the <code>--daemon</code> option, the server remains attached to the terminal.
+            Then to stop the server you can enter <code>Ctrl-C</code>.
+          </p>
+        </section>
+        <section>
+          <h2>Interactive Server</h2>
+          <p>
+            The interactive mode is really only useful for debugging, in conjunction with TLS debug mode, like this:
+          </p>
+          <pre><code data-trim class="bash">
+          $ taskd config debug.tls 3
+          $ taskd server --data $TASKDDATA
+          ...
+          </code></pre>
+          <p>
+            With a <code>debug.tls</code> setting that is non-zero, you see lots of security-related diagnostic output.
+          </p>
+        </section>
+        <section>
+          <h2>systemd unit file</h2>
+          <p>
+            You can start Taskserver using a systemd-unitfile (called <code>taskd.service</code>) like the one on the next slide (please add the contents of <code>$TASKDDATA</code> not the variable itself).
+            Running the Taskserver as root is not recommended, please add an appropriate user and group to run the daemon with (<code>$TASKDUSER</code> and <code>$TASKDGROUP</code>).
+          </p>
+        </section>
+        <section>
+          <h2>taskd.service</h2>
+          <pre><code data-trim class="bash">
+          [Unit]
+          Description=Secure server providing multi-user, multi-client access to Taskwarrior data
+          Requires=network.target
+          After=network.target
+          Documentation=http://taskwarrior.org/docs/#taskd
+
+          [Service]
+          ExecStart=/usr/local/bin/taskd server --data $TASKDDATA
+          Type=simple
+          User=$TASKDUSER
+          Group=$TASKDGROUP
+          WorkingDirectory=$TASKDDATA
+          PrivateTmp=true
+          InaccessibleDirectories=/home /root /boot /opt /mnt /media
+          ReadOnlyDirectories=/etc /usr
+
+          [Install]
+          WantedBy=multi-user.target
+          </code></pre>
+        </section>
+        <section>
+          <h2>Control with systemd</h2>
+          <p>
+            Afterwards prepare systemd to recognise the file.
+            The following commands need to be run as root-user.
+          </p>
+          <pre><code data-trim class="bash">
+          $ cp taskd.service /etc/systemd/system
+          $ systemctl daemon-reload
+          $ systemctl start taskd.service
+          $ systemctl status taskd.service
+          </code></pre>
+          <p>
+            In case everything is running fine, enable the script to start Taskserver on every boot.
+          </p>
+          <pre><code data-trim class="bash">
+          $ systemctl enable taskd.service
+          </code></pre>
+        </section>
+      </section>
+    <section>
+      <h1>Client Setup</h1>
+    </section>
+    <section>
+      <section>
+        <h2>Add Organization</h2>
+        <p>
+          A user account must be created, along with a key, cert and ID, before syncing may occur.
+        </p>
+        <p>
+          Before creating a user account, you may need to create an organization.
+          An organization consists of a group of zero or more users.
+          You can get away with just one organization, and in this example, we will create just one, named 'Public'.
+        </p>
+      </section>
+      <section>
+        <h2>Create Organisation</h2>
+        <p>
+          You can create as many organizations as you wish (even one per user), and the purpose is simply to group
+          users together.
+          Future features will utilize this.
+        </p>
+        <pre><code data-trim class="bash">
+          $ taskd add org Public
+          Created organization 'Public'
+        </code></pre>
+        <p>
+          Now the organization 'Public' exists, we can add users to that organization.
+        </p>
+      </section>
+      <section>
+        <h2>Create User</h2>
+        <p>
+          Now we add a new user, named 'First Last' as an example.
+          You can use any name you wish, and if it contains spaces, quote the name as shown.
+        </p>
+        <pre><code data-trim class="bash">
+          $ taskd add user 'Public' 'First Last'
+          New user key: cf31f287-ee9e-43a8-843e-e8bbd5de4294
+          Created user 'First Last' for organization 'Public'
+        </code></pre>
+        <p>
+          Note that you will get a different 'New user key' than is shown here, and you will need to retain it, to be used later for client configuration.
+          Note that the key is just a unique id, because your name alone is not necessarily unique.
+        </p>
+      </section>
+      <section>
+        <h2>Create Certificate and Key</h2>
+        <p>
+          Go to your <code>SOURCEDIR</code>, which depends on which installation method you chose.
+          Here it is assumed that you installed from the source tarball.
+        </p>
+        <pre><code data-trim class="bash">
+          $ cd ~/taskd-1.1.0/pki
+          $ ./generate.client first_last
+        </code></pre>
+        <p>
+          This will generate a new key and cert, named <code>first_last.cert.pem</code> and <code>first_last.key.pem</code>.
+          It is not important that 'first\_last' was used here, just that it is something unique, and valid for use in a file name.
+          It has no bearing on security.
+        </p>
+      </section>
+      <section>
+        <h2>Let's encrypt</h2>
+        <p>
+          Certificates coming from Let's encrypt have <strong>not</strong> been successfully used by anyone.
+        </p>
+        <p>
+          Please remember that Let's encrypt only generates servers, but we need a client certificate as well.
+        </p>
+        <p>
+          A working scenario would be highly appreciated.
+        </p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Taskwarrior Configuration</h2>
+        <p>
+          You have now created a new user account on the server, created a new client cert and key, and have details that need to be transferred to the user, to set up a sync client.
+        </p>
+      </section>
+      <section>
+        <h2>Information needed</h2>
+        <ul>
+          <li><code>ca.cert.pem</code> is the certificate authority, and the only way to validate self-signed certs like ours.
+          </li>
+          <li><code>first_last.cert.pem</code> is the client certificate.</li>
+          <li><code>first_last.key.pem</code> is the client key.</li>
+            <li>The new user key (yours will be different): <code>cf31f287-ee9e-43a8-843e-e8bbd5de4294</code></li>
+            <li>The organization, <code>Public</code>.</li>
+            <li>The full and proper user name, <code>First Last</code>.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Server address and port</h2>
+          <p>
+            The server address and port, <code>host.domain:53589</code> is needed as well.
+          </p>
+          <p>
+            In the server configuration we used <code>localhost</code> as an example.
+            With <code>localhost</code> your server can not be reached from outside the machine your are running it on.
+          </p>
+          <p>
+            Whatever you actually used there, should be used here.
+          </p>
+        </section>
+        <section>
+          <h2>Certificates</h2>
+          <p>
+            If you have configured Taskserver and created a user account (or better yet, someone created an account for you) then you now have details needed in the configuration of your Taskwarrior client.
+          </p>
+          <p>
+            Now we feed this information to Taskwarrior.
+          </p>
+        </section>
+        <section>
+          <h2>Copy all of them</h2>
+          <p>
+            Copy the Cert, Key and CA to your <code>~/.task</code> directory.
+            The reason we are copying the CA cert is because this is a self-signed cert, and we need the CA to validate against.
+            Alternately we could force Taskwarrior to trust all certs, but that is not recommended.
+          </p>
+          <pre><code data-trim class="bash">
+          $ cp first_last.cert.pem ~/.task
+          $ cp first_last.key.pem ~/.task
+          $ cp ca.cert.pem ~/.task
+          </code></pre>
+        </section>
+        <section>
+          <h2>Configure Taskwarrior to use them</h2>
+          <p>
+            Now we need to make Taskwarrior aware of these certs:
+          </p>
+          <pre><code data-trim class="bash">
+          $ task config taskd.certificate -- ~/.task/first_last.cert.pem
+          $ task config taskd.key -- ~/.task/first_last.key.pem
+          $ task config taskd.ca -- ~/.task/ca.cert.pem
+          </code></pre>
+        </section>
+        <section>
+          <h2>Configure Taskserver in Taskwarrior</h2>
+          <p>
+            Now set the server info:
+          </p>
+          <pre><code data-trim class="bash">
+          $ task config taskd.server -- host.domain:53589
+          </code></pre>
+          <p>
+            Finally we provide the credentials, which combine the organization, account name and user key:
+          </p>
+          <pre><code data-trim class="bash">
+          $ task config taskd.credentials -- Public/First Last/cf31f287-ee9e-43a8-843e-e8bbd5de4294
+          </code></pre>
+          <p>
+            Your Taskwarrior is now ready to sync.
+          </p>
+        </section>
+        <section>
+          <h2>Trust Level</h2>
+          <p>
+            It is possible to configure Taskwarrior's trust level, which determines how the server certificate is treated.
+          </p>
+          <p>
+            You could specify <code>taskd.trust=ignore hostname</code> to skip certificate hostname validation.
+            <strong>This is a bad idea</strong>.
+            You can also specify <code>taskd.trust=allow all</code> to perform no validation.
+            <strong>This is a worse idea</strong>.
+          </p>
+          <p>
+            The default value is <code>taskd.trust=strict</code> which performs the most stringent verification, and is more secure.
+          </p>
+        </section>
+        <section>
+          <h2>Note on Taskwarrior 2.3.0</h2>
+          <p>
+            For Taskwarrior 2.3.0 you can specify <code>taskd.trust=yes</code> in order to skip certificate validation.
+            <strong>This is a bad idea.</strong>
+            The default is <code>taskd.trust=no</code>, which does not trust the server certificate, which is more secure.
+          </p>
+        </section>
+      </section>
+    <section>
+      <h1>Sync</h1>
+    </section>
+    <section>
+      <section>
+        <h2>First Time Sync</h2>
+        <p>
+          You will do this differently depending on whether this is the first sync per device, or one of the many subsequent syncs.
+        </p>
+        <p>
+          The first time you sync is special - the client sends all your tasks to the server.
+          This is something you should only do once on only one device.
+        </p>
+        <pre><code data-trim class="bash">
+          $ task sync init
+          Please confirm that you wish to upload all your pending tasks to the Task Server (yes/no) yes
+          Syncing with host.domain:53589
+
+          Sync successful.  2 changes uploaded.
+        </code></pre>
+      </section>
+      <section>
+        <h2>Note</h2>
+        <p>
+          You should get an indication that tasks were uploaded, in this case 2 of them.
+        </p>
+        <p>
+          Please note that older Taskwarrior versions - before 2.5.1 - only sync the <strong>pending</strong> tasks and not all tasks.
+        </p>
+      </section>
+      <section>
+        <h2>General Sync</h2>
+        <p>
+          After the first time sync, you switch and just use this command:
+        </p>
+        <pre><code data-trim class="bash">
+          $ task sync
+          Syncing with host.domain:53589
+
+          Sync successful.  No changes.
+        </code></pre>
+      </section>
+      <section>
+        <h2>Feedback</h2>
+        <p>
+          This will give you feedback about what happened.
+          Please note that it is perfectly safe to run this command as often as you wish.
+          Syncing is safe and does not consume great system resources.
+        </p>
+      </section>
+      <section>
+        <h2>Connectivity</h2>
+        <p>
+          Note that if your client is a mobile device, a sync command may consume some of your data usage.
+          Act accordingly.
+        </p>
+        <p>
+          But it does require network connectivity, and if there is no connectivity you will be notified.
+          It is not a problem if a sync fails because of this, because the next sync that works will catch up with all the changes, and do the right merging.
+          <strong>Taskwarrior and Taskserver were designed to work together, and tolerate intermittent connectivity</strong>.
+        </p>
+      </section>
+      <section>
+        <h2>Sync Reminder</h2>
+        <p>
+          After you modify data locally, Taskwarrior will start notifying you that you need to sync, after commands, like this:
+        </p>
+        <pre><code data-trim class="bash">
+          $ task project:foo list
+          No matches.
+          There are local changes.  Sync required.
+        </code></pre>
+        <p>
+          This is just a reminder to sync.
+        </p>
+      </section>
+      <section>
+        <h2>Sync!</h2>
+        <p>
+          Respond with a sync, and the reminder goes away:
+        </p>
+        <pre><code data-trim class="bash">
+          $ task sync
+          Syncing with &lt;server&gt;:&lt;port&gt;
+
+          Sync successful.  1 changes uploaded.
+        </code></pre>
+        <p>
+          If you do not respond with a sync, then local changes accumulate unseen by other clients.
+          When you do eventually sync, the data will be properly propagated, so it is a question of whether you <strong>need</strong> current data on the server.
+          It is perfectly fine to allow <strong>weeks</strong> to go by without a sync.
+        </p>
+      </section>
+    </section>
+    <section>
+      <h1>Getting Help</h1>
+    </section>
+    <section>
+      <section>
+        <h2>Troubleshooting Guide</h2>
+        <p>
+          Please note there is a troubleshooting guide as well.
+        </p>
+        <p>
+          You can find the recent version <a href="https://gitpitch.com/GothenburgBitFactory/taskserver-troubleshooting">here</a>.
+        </p>
+      </section>
+      <section>
+        <h2>Getting Help</h2>
+        <p>
+          As a last resort, ask for help.
+          But please make sure you have carefully reviewed your setup, and gone through the checks above before asking.
+          No one wants to lead you through the steps above to discover that you didn't.
+        </p>
+        <p>
+          We'll ask you to provide the <code>diagnostics</code> output for both Taskwarrior and Taskserver, then we're going to go through the steps above, because this is our checklist also.
+        </p>
+      </section>
+      <section>
+        <h2>Getting Help (1)</h2>
+        <p>
+          There are several ways of getting help:
+        </p>
+        <ul>
+          <li>We have an <a href="https://taskwarrior.org/support/faq.html">FAQ</a> covering a lot of questions.</li>
+          <li>Email us at <a href="mailto:support@taskwarrior.org">support@taskwarrior.org</a>, then wait patiently for a volunteer to respond.</li>
+          <li>Join us IRC in the <a href="https://botbot.me/freenode/taskwarrior/">#taskwarrior</a> channel on Freenode.net, and get a quick response from the community, where, as you have anticipated, we will walk you through the checklist above.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Getting Help (2)</h2>
+        <p>
+          There are several ways of getting help:
+        </p>
+        <ul>
+          <li>Even though Twitter is no means of support, you can get in touch with <a href="https://twitter.com/taskwarrior">@taskwarrior</a>.</li>
+          <li>We have a <a href="https://groups.google.com/forum/\#!forum/taskwarrior-user">User Mailinglist</a> which you can join anytime to discuss about Taskwarrior and techniques.</li>
+          <li>The <a href="https://groups.google.com/forum/\#!forum/taskwarrior-dev">Developer Mailinglist</a> is focussing on a more technical oriented audience.</li>
+        </ul>
+      </section>
+    </section>
+  </div>
+  <div class='footer'>
+    Taskwarrior Academy
+  </div>
+</div>
+<script src="node_modules/reveal.js/dist/reveal.js"></script>
+<script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+<script>
+  Reveal.initialize({
+    plugins: [ RevealHighlight ]
+  });
+</script>
+</body>
+</html>
