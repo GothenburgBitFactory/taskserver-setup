@@ -27,8 +27,6 @@ export default class Backgrounds {
 	 */
 	create() {
 
-		let printMode = this.Reveal.isPrintingPDF();
-
 		// Clear prior backgrounds
 		this.element.innerHTML = '';
 		this.element.classList.add( 'no-transition' );
@@ -114,8 +112,24 @@ export default class Backgrounds {
 	 */
 	sync( slide ) {
 
-		let element = slide.slideBackgroundElement,
+		const element = slide.slideBackgroundElement,
 			contentElement = slide.slideBackgroundContentElement;
+
+		const data = {
+			background: slide.getAttribute( 'data-background' ),
+			backgroundSize: slide.getAttribute( 'data-background-size' ),
+			backgroundImage: slide.getAttribute( 'data-background-image' ),
+			backgroundVideo: slide.getAttribute( 'data-background-video' ),
+			backgroundIframe: slide.getAttribute( 'data-background-iframe' ),
+			backgroundColor: slide.getAttribute( 'data-background-color' ),
+			backgroundGradient: slide.getAttribute( 'data-background-gradient' ),
+			backgroundRepeat: slide.getAttribute( 'data-background-repeat' ),
+			backgroundPosition: slide.getAttribute( 'data-background-position' ),
+			backgroundTransition: slide.getAttribute( 'data-background-transition' ),
+			backgroundOpacity: slide.getAttribute( 'data-background-opacity' ),
+		};
+
+		const dataPreload = slide.hasAttribute( 'data-preload' );
 
 		// Reset the prior background state in case this is not the
 		// initial sync
@@ -135,22 +149,9 @@ export default class Backgrounds {
 		contentElement.style.opacity = '';
 		contentElement.innerHTML = '';
 
-		let data = {
-			background: slide.getAttribute( 'data-background' ),
-			backgroundSize: slide.getAttribute( 'data-background-size' ),
-			backgroundImage: slide.getAttribute( 'data-background-image' ),
-			backgroundVideo: slide.getAttribute( 'data-background-video' ),
-			backgroundIframe: slide.getAttribute( 'data-background-iframe' ),
-			backgroundColor: slide.getAttribute( 'data-background-color' ),
-			backgroundRepeat: slide.getAttribute( 'data-background-repeat' ),
-			backgroundPosition: slide.getAttribute( 'data-background-position' ),
-			backgroundTransition: slide.getAttribute( 'data-background-transition' ),
-			backgroundOpacity: slide.getAttribute( 'data-background-opacity' )
-		};
-
 		if( data.background ) {
 			// Auto-wrap image urls in url(...)
-			if( /^(http|file|\/\/)/gi.test( data.background ) || /\.(svg|png|jpg|jpeg|gif|bmp)([?#\s]|$)/gi.test( data.background ) ) {
+			if( /^(http|file|\/\/)/gi.test( data.background ) || /\.(svg|png|jpg|jpeg|gif|bmp|webp)([?#\s]|$)/gi.test( data.background ) ) {
 				slide.setAttribute( 'data-background-image', data.background );
 			}
 			else {
@@ -161,13 +162,14 @@ export default class Backgrounds {
 		// Create a hash for this combination of background settings.
 		// This is used to determine when two slide backgrounds are
 		// the same.
-		if( data.background || data.backgroundColor || data.backgroundImage || data.backgroundVideo || data.backgroundIframe ) {
+		if( data.background || data.backgroundColor || data.backgroundGradient || data.backgroundImage || data.backgroundVideo || data.backgroundIframe ) {
 			element.setAttribute( 'data-background-hash', data.background +
 															data.backgroundSize +
 															data.backgroundImage +
 															data.backgroundVideo +
 															data.backgroundIframe +
 															data.backgroundColor +
+															data.backgroundGradient +
 															data.backgroundRepeat +
 															data.backgroundPosition +
 															data.backgroundTransition +
@@ -177,9 +179,10 @@ export default class Backgrounds {
 		// Additional and optional background properties
 		if( data.backgroundSize ) element.setAttribute( 'data-background-size', data.backgroundSize );
 		if( data.backgroundColor ) element.style.backgroundColor = data.backgroundColor;
+		if( data.backgroundGradient ) element.style.backgroundImage = data.backgroundGradient;
 		if( data.backgroundTransition ) element.setAttribute( 'data-background-transition', data.backgroundTransition );
 
-		if( slide.hasAttribute( 'data-preload' ) ) element.setAttribute( 'data-preload', '' );
+		if( dataPreload ) element.setAttribute( 'data-preload', '' );
 
 		// Background image options are set on the content wrapper
 		if( data.backgroundSize ) contentElement.style.backgroundSize = data.backgroundSize;
@@ -187,13 +190,33 @@ export default class Backgrounds {
 		if( data.backgroundPosition ) contentElement.style.backgroundPosition = data.backgroundPosition;
 		if( data.backgroundOpacity ) contentElement.style.opacity = data.backgroundOpacity;
 
+		const contrastClass = this.getContrastClass( slide );
+
+		if( typeof contrastClass === 'string' ) {
+			slide.classList.add( contrastClass );
+		}
+
+	}
+
+	/**
+	 * Returns a class name that can be applied to a slide to indicate
+	 * if it has a light or dark background.
+	 *
+	 * @param {*} slide
+	 *
+	 * @returns {string|null}
+	 */
+	getContrastClass( slide ) {
+
+		const element = slide.slideBackgroundElement;
+
 		// If this slide has a background color, we add a class that
 		// signals if it is light or dark. If the slide has no background
 		// color, no class will be added
-		let contrastColor = data.backgroundColor;
+		let contrastColor = slide.getAttribute( 'data-background-color' );
 
-		// If no bg color was found, check the computed background
-		if( !contrastColor ) {
+		// If no bg color was found, or it cannot be converted by colorToRgb, check the computed background
+		if( !contrastColor || !colorToRgb( contrastColor ) ) {
 			let computedBackgroundStyle = window.getComputedStyle( element );
 			if( computedBackgroundStyle && computedBackgroundStyle.backgroundColor ) {
 				contrastColor = computedBackgroundStyle.backgroundColor;
@@ -201,20 +224,38 @@ export default class Backgrounds {
 		}
 
 		if( contrastColor ) {
-			let rgb = colorToRgb( contrastColor );
+			const rgb = colorToRgb( contrastColor );
 
 			// Ignore fully transparent backgrounds. Some browsers return
 			// rgba(0,0,0,0) when reading the computed background color of
 			// an element with no background
 			if( rgb && rgb.a !== 0 ) {
 				if( colorBrightness( contrastColor ) < 128 ) {
-					slide.classList.add( 'has-dark-background' );
+					return 'has-dark-background';
 				}
 				else {
-					slide.classList.add( 'has-light-background' );
+					return 'has-light-background';
 				}
 			}
 		}
+
+		return null;
+
+	}
+
+	/**
+	 * Bubble the 'has-light-background'/'has-dark-background' classes.
+	 */
+	bubbleSlideContrastClassToElement( slide, target ) {
+
+		[ 'has-light-background', 'has-dark-background' ].forEach( classToBubble => {
+			if( slide.classList.contains( classToBubble ) ) {
+				target.classList.add( classToBubble );
+			}
+			else {
+				target.classList.remove( classToBubble );
+			}
+		}, this );
 
 	}
 
@@ -260,10 +301,12 @@ export default class Backgrounds {
 
 					backgroundv.classList.remove( 'past', 'present', 'future' );
 
-					if( v < indices.v ) {
+					const indexv = typeof indices.v === 'number' ? indices.v : 0;
+
+					if( v < indexv ) {
 						backgroundv.classList.add( 'past' );
 					}
-					else if ( v > indices.v ) {
+					else if ( v > indexv ) {
 						backgroundv.classList.add( 'future' );
 					}
 					else {
@@ -319,14 +362,7 @@ export default class Backgrounds {
 		// If there's a background brightness flag for this slide,
 		// bubble it to the .reveal container
 		if( currentSlide ) {
-			[ 'has-light-background', 'has-dark-background' ].forEach( classToBubble => {
-				if( currentSlide.classList.contains( classToBubble ) ) {
-					this.Reveal.getRevealElement().classList.add( classToBubble );
-				}
-				else {
-					this.Reveal.getRevealElement().classList.remove( classToBubble );
-				}
-			}, this );
+			this.bubbleSlideContrastClassToElement( currentSlide, this.Reveal.getRevealElement() );
 		}
 
 		// Allow the first background to apply without transition
@@ -391,6 +427,12 @@ export default class Backgrounds {
 			this.element.style.backgroundPosition = horizontalOffset + 'px ' + -verticalOffset + 'px';
 
 		}
+
+	}
+
+	destroy() {
+
+		this.element.remove();
 
 	}
 
