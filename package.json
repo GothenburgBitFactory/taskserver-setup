@@ -20,8 +20,8 @@
     "url": "https://github.com/gothenburgbitfactory/taskserver-setup/issues"
   },
   "homepage": "https://github.com/gothenburgbitfactory/taskserver-setup#readme",
-  "dependencies": {
+  "devDependencies": {
     "@web/dev-server": "^0.4.6",
-    "reveal.js": "^5.0.4"
+    "reveal.js": "^5.2.1"
   }
 }
