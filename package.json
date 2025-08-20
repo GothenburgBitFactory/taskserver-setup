@@ -22,6 +22,6 @@
   "homepage": "https://github.com/gothenburgbitfactory/taskserver-setup#readme",
   "dependencies": {
     "@web/dev-server": "^0.4.6",
-    "reveal.js": "^5.0.4"
+    "reveal.js": "^6.0.0"
   }
 }
