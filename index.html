@@ -13,7 +13,7 @@
     <section>
       <h1>Taskserver Setup</h1>
       <p>
-        This guide leads you through all the necessary steps to setup your own Taskserver to sync your Taskwarrior-tasks.
+        This guide leads you through all the necessary steps to set up your own Taskserver to sync your Taskwarrior-tasks.
       </p>
       <p>
         Please follow the steps <strong>carefully</strong> and <strong>note</strong> all things you do differently.
@@ -26,7 +26,7 @@
         <h2>Backup Your Data</h2>
         <p>
           Let's reinforce a good habit and make a backup copy of your data first.
-          Here is a very easy way to backup your data:
+          Here is a very easy way to back up your data:
         </p>
         <pre><code data-trim class="bash">
           $ cd ~/.task
@@ -128,7 +128,7 @@
       <section>
         <h2>Operating Systems</h2>
         <p>
-          We have detailed instructions for the following operating operating systems on the following slides:
+          We have detailed instructions for the following operating systems on the following slides:
         </p>
         <ul>
           <li>CentOS</li>
@@ -149,7 +149,7 @@
           <li><strong>Recommendation</strong>: Use the Ubuntu subsystem in Windows 10 and follow the Ubuntu instructions.</li>
         </ul>
         <p>
-          In case you can add your operating system of choice, please send an email to <a href="mailto:support@taskwarrior.org">support@taskwarrior.org</a> (Thank you!).
+          In case you can add your operating system of choice, please email to <a href="mailto:support@taskwarrior.org">support@taskwarrior.org</a> (Thank you!).
         </p>
       </section>
       <section>
@@ -397,7 +397,7 @@
         <section>
           <h2>Development version</h2>
           <p>
-            Patch branches are reserved for emergency releases, so in this example you would choose to build 1.2.0 as the latest development branch like this (please not that starting with version 1.2.0 we make use of submodules).
+            Patch branches are reserved for emergency releases, so in this example you would choose to build 1.2.0 as the latest development branch like this (please note that starting with version 1.2.0 we make use of submodules).
           </p>
           <pre><code data-trim class="bash">
           $ git checkout 1.2.0
@@ -460,7 +460,7 @@
           </code></pre>
         </section>
         <section>
-          <h2>Interprete the results</h2>
+          <h2>Interpret the results</h2>
           <p>
             This example shows that all 2,920 tests pass.
             If you see test failures, stop and report them.
@@ -595,7 +595,7 @@
         <section>
           <h2>Copy the certificates</h2>
           <p>
-            Here is is assumed that you installed from the source tarball.
+            Here is assumed that you installed from the source tarball.
           </p>
           <pre><code data-trim class="bash">
           $ cd ~/taskd-1.1.0/pki
@@ -631,7 +631,7 @@
             There are the server key/certs, which are used to authenticate the server and encrypt.
           </p>
           <p>
-            Finally there are client key/certs, which are not what you might expect.
+            Finally, there are client key/certs, which are not what you might expect.
             These are for API access, and not for your Taskwarrior client.
             Those are created later.
           </p>
@@ -756,7 +756,7 @@
         <section>
           <h2>Control with systemd</h2>
           <p>
-            Afterwards prepare systemd to recognise the file.
+            Afterward prepare systemd to recognize the file.
             The following commands need to be run as root-user.
           </p>
           <pre><code data-trim class="bash">
@@ -864,7 +864,7 @@
           <li><code>first_last.key.pem</code> is the client key.</li>
             <li>The new user key (yours will be different): <code>cf31f287-ee9e-43a8-843e-e8bbd5de4294</code></li>
             <li>The organization, <code>Public</code>.</li>
-            <li>The full and proper user name, <code>First Last</code>.</li>
+            <li>The full and proper username, <code>First Last</code>.</li>
           </ul>
         </section>
         <section>
@@ -874,7 +874,7 @@
           </p>
           <p>
             In the server configuration we used <code>localhost</code> as an example.
-            With <code>localhost</code> your server can not be reached from outside the machine your are running it on.
+            With <code>localhost</code> your server can not be reached from outside the machine you are running it on.
           </p>
           <p>
             Whatever you actually used there, should be used here.
@@ -893,7 +893,7 @@
           <h2>Copy all of them</h2>
           <p>
             Copy the Cert, Key and CA to your <code>~/.task</code> directory.
-            The reason we are copying the CA cert is because this is a self-signed cert, and we need the CA to validate against.
+            The reason we are copying the CA cert is that this is a self-signed cert, and we need the CA to validate against.
             Alternately we could force Taskwarrior to trust all certs, but that is not recommended.
           </p>
           <pre><code data-trim class="bash">
@@ -922,7 +922,7 @@
           $ task config taskd.server -- host.domain:53589
           </code></pre>
           <p>
-            Finally we provide the credentials, which combine the organization, account name and user key:
+            Finally, we provide the credentials, which combine the organization, account name and user key:
           </p>
           <pre><code data-trim class="bash">
           $ task config taskd.credentials -- Public/First Last/cf31f287-ee9e-43a8-843e-e8bbd5de4294
@@ -1091,7 +1091,7 @@
         </p>
         <ul>
           <li>Even though Twitter is no means of support, you can get in touch with <a href="https://twitter.com/taskwarrior">@taskwarrior</a>.</li>
-          <li>We have a <a href="https://groups.google.com/forum/\#!forum/taskwarrior-user">User Mailinglist</a> which you can join anytime to discuss about Taskwarrior and techniques.</li>
+          <li>We have a <a href="https://groups.google.com/forum/\#!forum/taskwarrior-user">User Mailinglist</a> which you can join anytime to discuss Taskwarrior and techniques.</li>
           <li>The <a href="https://groups.google.com/forum/\#!forum/taskwarrior-dev">Developer Mailinglist</a> is focussing on a more technical oriented audience.</li>
         </ul>
       </section>
